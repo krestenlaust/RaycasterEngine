@@ -2,6 +2,25 @@
 
 public class Map2D
 {
+    public bool IsWall(int x, int y)
+    {
+        int[,] map =
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 1 },
+            { 1, 0, 0, 0, 1 },
+            { 1, 1, 1, 1, 1 }
+        };
+
+        return map[x, y] == 1;
+    }
+
+    public bool Outside(int x, int y)
+    {
+        return x < 0 || x > 5 || y < 0 || y > 5;
+    }
+
     public Vector2D Cast(Vector2D origin, Orientation2D direction, float maxDistance)
     {
         // Calculate offset to nearby grid.
@@ -19,6 +38,17 @@ public class Map2D
     /// <returns></returns>
     public Vector2D CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
     {
+        Vector2D directionVector = direction.Vector;
+
+        for (float dist = 0; dist < maxDistance; dist += stepSize)
+        {
+            Vector2D hit = directionVector * dist + origin;
+            Vector2D hitCell = hit.Floor;
+
+            
+        }
+
+
         throw new NotImplementedException();
     }
 
