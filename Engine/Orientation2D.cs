@@ -20,4 +20,6 @@ public readonly struct Orientation2D(float radians)
 
     public static Orientation2D FromDegrees(float degrees) =>
         new Orientation2D(degrees * ((float)Math.PI / 180));
+
+    public Vector2D Vector { get => new Vector2D((float)Math.Cos(Radians), (float)Math.Sin(Radians)); }
 }
