@@ -17,4 +17,7 @@ public readonly struct Orientation2D(float radians)
     public float Degrees { get; } = ExtendedMath.Modulo((180 / (float)Math.PI) * radians, MaxDegrees);
     public bool Upperhalf { get; } = radians < Math.PI;
     public bool Lefthalf { get; } = radians > (Math.PI / 2) && radians < ((Math.PI / 2) * 3);
+
+    public static Orientation2D FromDegrees(float degrees) =>
+        new Orientation2D(degrees * ((float)Math.PI / 180));
 }
