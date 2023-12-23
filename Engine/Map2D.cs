@@ -17,7 +17,7 @@ public class Map2D
     /// This would make it easier to change raycast method to a non-euclidian method in the future.
     /// </summary>
     /// <returns></returns>
-    public Vector2D CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance)
+    public Vector2D CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
     {
         throw new NotImplementedException();
     }
