@@ -1,5 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
 namespace Engine.Tests
 {
     [TestClass]
@@ -85,6 +83,48 @@ namespace Engine.Tests
             Assert.AreEqual((float)Math.PI * 2, radians360deg, 0.001f);
             Assert.AreEqual((float)Math.PI * 3, radians540deg, 0.001f);
             Assert.AreEqual(-(float)Math.PI, radiansNeg180deg, 0.001f);
+        }
+
+        [TestMethod]
+        public void TestUpperhalfProperty()
+        {
+            // I'm not testing values outside 0 and 360.
+
+            float upperhalf1deg = 1;
+            float upperhalf179deg = 179;
+            float lowerhalf181deg = 181;
+            float lowerHalf359deg = 359;
+
+            bool deg1 = Orientation2D.FromDegrees(upperhalf1deg).Upperhalf;
+            bool deg179 = Orientation2D.FromDegrees(upperhalf179deg).Upperhalf;
+            bool deg181 = Orientation2D.FromDegrees(lowerhalf181deg).Upperhalf;
+            bool deg359 = Orientation2D.FromDegrees(lowerHalf359deg).Upperhalf;
+
+            Assert.AreEqual(true, deg1);
+            Assert.AreEqual(true, deg179);
+            Assert.AreEqual(false, deg181);
+            Assert.AreEqual(false, deg359);
+        }
+
+        [TestMethod]
+        public void TestLefthalfProperty()
+        {
+            // I'm not testing values outside 0 and 360.
+
+            float lefthalf91deg = 91;
+            float lefthalf269deg = 269;
+            float righthalf89deg = 89;
+            float rightHalf271deg = 271;
+
+            bool deg91 = Orientation2D.FromDegrees(lefthalf91deg).Lefthalf;
+            bool deg269 = Orientation2D.FromDegrees(lefthalf269deg).Lefthalf;
+            bool deg89 = Orientation2D.FromDegrees(righthalf89deg).Lefthalf;
+            bool deg271 = Orientation2D.FromDegrees(rightHalf271deg).Lefthalf;
+
+            Assert.AreEqual(true, deg91);
+            Assert.AreEqual(true, deg269);
+            Assert.AreEqual(false, deg89);
+            Assert.AreEqual(false, deg271);
         }
     }
 }
