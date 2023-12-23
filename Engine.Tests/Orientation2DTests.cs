@@ -39,9 +39,28 @@ namespace Engine.Tests
             float degreesNeg180 = new Orientation2D(radiansNeg180deg).Degrees;
 
             // Assert
+            Assert.AreEqual(360, degrees360, 0.001f);
+            Assert.AreEqual(540, degrees540, 0.001f);
+            Assert.AreEqual(-180, degreesNeg180, 0.001f);
+        }
+
+        [TestMethod]
+        public void TestNormalize()
+        {
+            // Arrange
+            float radians360deg = (float)Math.PI * 2;
+            float radians540deg = (float)Math.PI * 3;
+            float radiansNeg180deg = -(float)Math.PI;
+
+            // Act
+            float degrees360 = new Orientation2D(radians360deg).Normalized.Degrees;
+            float degrees540 = new Orientation2D(radians540deg).Normalized.Degrees;
+            float degreesNeg180 = new Orientation2D(radiansNeg180deg).Normalized.Degrees;
+
+            // Assert
             Assert.AreEqual(0, degrees360, 0.001f);
-            Assert.AreEqual(180, degrees540, 0.001f); // We expect the value to be convert to 0-360 degrees.
-            Assert.AreEqual(180, degreesNeg180, 0.001f); // We expect the value to be convert to 0-360 degrees.
+            Assert.AreEqual(180, degrees540, 0.001f);
+            Assert.AreEqual(180, degreesNeg180, 0.001f);
         }
 
         [TestMethod]
