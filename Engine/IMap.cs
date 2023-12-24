@@ -1,8 +1,8 @@
 ﻿namespace Engine;
 
-public interface IMap<in T> where T : struct
+public interface IMap<TPosition, TRenderingUnit>
 {
-    bool IsOutsideMap(T position);
+    bool IsOutsideMap(TPosition position);
 
-    bool IsWall(T position);
+    bool IsHit(TPosition position, out TRenderingUnit unit);
 }

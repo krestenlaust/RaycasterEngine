@@ -4,18 +4,18 @@
 /// Euclidian casting method, which simply takes a smal stepsize to look for hits.
 /// </summary>
 /// <param name="stepSize"></param>
-public class DiscreteRaycast(float stepSize) : ICast<Vector2D, Orientation2D, float>
+public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICast<Vector2D, Orientation2D, float, TRenderingUnit>
 {
     public float StepSize { get; set; } = stepSize;
 
-    public Vector2D? Cast(IMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance) =>
+    public (Vector2D, TRenderingUnit)? Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance) =>
         CastIncremental(map, origin, direction, maxDistance, StepSize);
 
     /// <summary>
     /// Casts using the basic incremental method.
     /// </summary>
     /// <returns></returns>
-    public static Vector2D? CastIncremental(IMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
+    public static (Vector2D, TRenderingUnit)? CastIncremental(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
     {
         Vector2D directionVector = direction.Vector;
 
@@ -29,9 +29,9 @@ public class DiscreteRaycast(float stepSize) : ICast<Vector2D, Orientation2D, fl
                 return null;
             }
 
-            if (map.IsWall(hitCell))
+            if (map.IsHit(hitCell, out TRenderingUnit unit))
             {
-                return hit;
+                return (hit, unit);
             }
         }
 

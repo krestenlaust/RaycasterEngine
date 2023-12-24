@@ -1,7 +1,7 @@
 ﻿namespace Engine.Camera;
 
-public class PerspectiveCamera<TCastMethod, TPosition, TOrientation, TLength>
-    where TCastMethod : ICast<TPosition, TOrientation, TLength>
+public class PerspectiveCamera<TCastMethod, TPosition, TOrientation, TLength, TRenderingUnit>
+    where TCastMethod : ICast<TPosition, TOrientation, TLength, TRenderingUnit>
     where TPosition : struct
     where TOrientation : struct
     where TLength : struct

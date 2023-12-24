@@ -1,9 +1,7 @@
 ﻿namespace Engine;
 
-public interface ICast<TPosition, TOrientation, TLength>
-    where TPosition : struct
-    where TOrientation : struct
+public interface ICast<TPosition, TOrientation, TLength, TRenderingUnit>
     where TLength : struct
 {
-    TPosition? Cast(IMap<TPosition> map, TPosition origin, TOrientation direction, TLength maxDistance);
+    (TPosition, TRenderingUnit)? Cast(IMap<TPosition, TRenderingUnit> map, TPosition origin, TOrientation direction, TLength maxDistance);
 }
