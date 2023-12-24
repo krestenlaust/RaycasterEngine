@@ -2,7 +2,26 @@
 
 public class Map2D
 {
-    public Vector2D Cast(Vector2D origin, Orientation2D direction, float maxDistance)
+    public bool IsWall(int x, int y)
+    {
+        int[,] map =
+        {
+            { 1, 1, 1, 1, 1 },
+            { 1, 0, 0, 0, 1 },
+            { 1, 0, 1, 0, 1 },
+            { 1, 0, 0, 0, 1 },
+            { 1, 1, 1, 1, 1 }
+        };
+
+        return map[x, y] == 1;
+    }
+
+    public bool Outside(int x, int y)
+    {
+        return x < 0 || x > 5 || y < 0 || y > 5;
+    }
+
+    public Vector2D? Cast(Vector2D origin, Orientation2D direction, float maxDistance)
     {
         // Calculate offset to nearby grid.
 
@@ -17,9 +36,29 @@ public class Map2D
     /// This would make it easier to change raycast method to a non-euclidian method in the future.
     /// </summary>
     /// <returns></returns>
-    public Vector2D CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
+    public Vector2D? CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
     {
-        throw new NotImplementedException();
+        Vector2D directionVector = direction.Vector;
+
+        for (float dist = 0; dist < maxDistance; dist += stepSize)
+        {
+            Vector2D hit = directionVector * dist + origin;
+            Vector2D hitCell = hit.Floor;
+            int x = (int)hitCell.X;
+            int y = (int)hitCell.Y;
+
+            if (Outside(x, y))
+            {
+                return null;
+            }
+
+            if (IsWall(x, y))
+            {
+                return hit;
+            }
+        }
+
+        return null;
     }
 
     /// <summary>
@@ -29,7 +68,7 @@ public class Map2D
     /// <param name="direction"></param>
     /// <param name="maxDistance"></param>
     /// <returns></returns>
-    Vector2D CastHorizontal(Vector2D origin, Orientation2D direction, float maxDistance)
+    Vector2D? CastHorizontal(Vector2D origin, Orientation2D direction, float maxDistance)
     {
         throw new NotImplementedException();
     }
