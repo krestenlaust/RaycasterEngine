@@ -21,7 +21,7 @@ public class Map2D
         return x < 0 || x > 5 || y < 0 || y > 5;
     }
 
-    public Vector2D Cast(Vector2D origin, Orientation2D direction, float maxDistance)
+    public Vector2D? Cast(Vector2D origin, Orientation2D direction, float maxDistance)
     {
         // Calculate offset to nearby grid.
 
@@ -36,7 +36,7 @@ public class Map2D
     /// This would make it easier to change raycast method to a non-euclidian method in the future.
     /// </summary>
     /// <returns></returns>
-    public Vector2D CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
+    public Vector2D? CastIncremental(Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
     {
         Vector2D directionVector = direction.Vector;
 
@@ -59,7 +59,7 @@ public class Map2D
     /// <param name="direction"></param>
     /// <param name="maxDistance"></param>
     /// <returns></returns>
-    Vector2D CastHorizontal(Vector2D origin, Orientation2D direction, float maxDistance)
+    Vector2D? CastHorizontal(Vector2D origin, Orientation2D direction, float maxDistance)
     {
         throw new NotImplementedException();
     }
