@@ -44,12 +44,21 @@ public class Map2D
         {
             Vector2D hit = directionVector * dist + origin;
             Vector2D hitCell = hit.Floor;
+            int x = (int)hitCell.X;
+            int y = (int)hitCell.Y;
 
-            
+            if (Outside(x, y))
+            {
+                return null;
+            }
+
+            if (IsWall(x, y))
+            {
+                return hit;
+            }
         }
 
-
-        throw new NotImplementedException();
+        return null;
     }
 
     /// <summary>
