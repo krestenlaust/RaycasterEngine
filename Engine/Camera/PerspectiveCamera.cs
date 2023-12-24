@@ -6,6 +6,7 @@ public class PerspectiveCamera<TCastMethod, TPosition, TOrientation, TLength, TR
     where TOrientation : struct
     where TLength : struct
 {
+    public TOrientation FieldOfView { get; set; }
     public TPosition Position { get; set; }
     public TOrientation Orientation { get; set; }
 }
