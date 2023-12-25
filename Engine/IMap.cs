@@ -1,6 +1,6 @@
 ﻿namespace Engine;
 
-public interface IMap<TPosition, TRenderingUnit>
+public interface IMap<in TPosition, TRenderingUnit>
 {
     bool IsOutsideMap(TPosition position);
 
