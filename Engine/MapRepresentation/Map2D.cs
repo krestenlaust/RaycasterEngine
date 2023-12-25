@@ -1,38 +1,37 @@
 ﻿namespace Engine.MapRepresentation;
 
-public class Map2D : IMap<Vector2D, char>
+public class Map2D<TRenderingUnit> : IMap<Vector2D, TRenderingUnit>
 {
-    public bool IsOutsideMap(Vector2D position)
+    readonly TRenderingUnit?[,] map;
+
+    public Map2D(TRenderingUnit?[,] map)
     {
-        return position.X < 0 || position.X > 5 || position.Y < 0 || position.Y > 5;
+        ArgumentNullException.ThrowIfNull(map);
+
+        this.map = map;
     }
 
     /// <summary>
-    /// Return character as rendering unit, if it hits.
+    /// Return rendering unit, if it hits.
     /// </summary>
     /// <param name="position"></param>
     /// <param name="renderingUnit"></param>
     /// <returns></returns>
-    public bool IsHit(Vector2D position, out char renderingUnit)
+    public bool IsHit(Vector2D position, out TRenderingUnit unit)
     {
-        int[,] map =
+        if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
         {
-            { 1, 1, 1, 1, 1 },
-            { 1, 0, 0, 0, 1 },
-            { 1, 0, 1, 0, 1 },
-            { 1, 0, 0, 0, 1 },
-            { 1, 1, 1, 1, 1 }
-        };
-
-        int hit = map[(int)position.X, (int)position.Y];
-
-        if (hit == 1)
-        {
-            renderingUnit = '#';
+            unit = retrivedUnit;
             return true;
         }
 
-        renderingUnit = default;
-        return false;
+        unit = default;
+        return true;
+    }
+
+    public bool IsOutsideMap(Vector2D position)
+    {
+        return position.X < 0 || position.X >= map.GetLength(0) ||
+            position.Y < 0 || position.Y >= map.GetLength(1);
     }
 }
