@@ -4,7 +4,7 @@
 /// Euclidian casting method, which simply takes a smal stepsize to look for hits.
 /// </summary>
 /// <param name="stepSize"></param>
-public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICast<Vector2D, Orientation2D, float, TRenderingUnit>
+public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
 {
     public float StepSize { get; set; } = stepSize;
 

@@ -1,6 +1,6 @@
 ﻿namespace Engine.CastMethod;
 
-public class CleverRaycast<TRenderingUnit> : ICast<Vector2D, Orientation2D, float, TRenderingUnit>
+public class CleverRaycast<TRenderingUnit> : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
 {
     public (Vector2D, TRenderingUnit)? Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance)
     {
