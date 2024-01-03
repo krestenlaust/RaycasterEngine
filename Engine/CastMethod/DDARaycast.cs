@@ -1,6 +1,10 @@
 ﻿namespace Engine.CastMethod;
 
-public class CleverRaycast<TRenderingUnit> : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
+/// <summary>
+/// Euclidian casting method, cast a ray using Digital Differential Analyzer.
+/// </summary>
+/// <typeparam name="TRenderingUnit"></typeparam>
+public class DDARaycast<TRenderingUnit> : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
 {
     public (Vector2D, TRenderingUnit)? Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance)
     {
