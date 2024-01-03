@@ -1,6 +1,7 @@
 ﻿namespace Engine.MapRepresentation;
 
 public class Map2D<TRenderingUnit> : IMap<Vector2D, TRenderingUnit>
+    where TRenderingUnit : struct
 {
     readonly TRenderingUnit?[,] map;
 
