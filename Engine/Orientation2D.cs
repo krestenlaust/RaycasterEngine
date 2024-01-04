@@ -10,6 +10,10 @@ public readonly struct Orientation2D(float radians)
 {
     public static readonly Orientation2D FullRotation = new(MathF.PI * 2);
     public static readonly Orientation2D NoRotation = new(0);
+    public static readonly Orientation2D UpRotation = new(MathF.PI / 2);
+    public static readonly Orientation2D LeftRotation = new(MathF.PI);
+    public static readonly Orientation2D DownRotation = new(MathF.PI * 2 - MathF.PI / 2);
+    public static readonly Orientation2D RightRotation = new(0);
 
     public float Radians { get; } = radians;
 
