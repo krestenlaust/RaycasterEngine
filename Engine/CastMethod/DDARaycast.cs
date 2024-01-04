@@ -2,6 +2,7 @@
 
 /// <summary>
 /// Euclidian casting method, cast a ray using Digital Differential Analyzer.
+/// https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/
 /// </summary>
 /// <typeparam name="TRenderingUnit"></typeparam>
 public class DDARaycast<TRenderingUnit> : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
