@@ -8,15 +8,29 @@ public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vecto
 {
     public float StepSize { get; set; } = stepSize;
 
-    public (Vector2D, TRenderingUnit)? Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance) =>
-        CastIncremental(map, origin, direction, maxDistance, StepSize);
+    public bool Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float, TRenderingUnit>? hit)
+    {
+        if (CastIncremental(map, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out TRenderingUnit renderedUnit, out float distance))
+        {
+            hit = new Hit<Vector2D, float, TRenderingUnit>(origin, hitPoint, distance, renderedUnit);
+            return true;
+        }
+        else
+        {
+            hit = default;
+            return false;
+        }
+    }
 
     /// <summary>
     /// Casts using the basic incremental method.
     /// </summary>
     /// <returns></returns>
-    public static (Vector2D, TRenderingUnit)? CastIncremental(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize)
+    public static bool CastIncremental(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out TRenderingUnit renderedUnit, out float distance)
     {
+        hitPoint = default;
+        renderedUnit = default;
+        distance = default;
         Vector2D directionVector = direction.Vector;
 
         for (float dist = 0; dist < maxDistance; dist += stepSize)
@@ -26,15 +40,18 @@ public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vecto
 
             if (map.IsOutsideMap(hitCell))
             {
-                return null;
+                return false;
             }
 
             if (map.IsHit(hitCell, out TRenderingUnit unit))
             {
-                return (hit, unit);
+                distance = dist;
+                hitPoint = hit;
+                renderedUnit = unit;
+                return true;
             }
         }
 
-        return null;
+        return false;
     }
 }
