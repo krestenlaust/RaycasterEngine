@@ -4,15 +4,15 @@
 /// Euclidian casting method, which simply takes a smal stepsize to look for hits.
 /// </summary>
 /// <param name="stepSize"></param>
-public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vector2D, Orientation2D, float, TRenderingUnit>
+public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation2D, float>
 {
     public float StepSize { get; set; } = stepSize;
 
-    public bool Cast(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float, TRenderingUnit>? hit)
+    public bool Cast(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
-        if (CastIncremental(map, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out TRenderingUnit renderedUnit, out float distance))
+        if (CastIncremental(map, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out float distance))
         {
-            hit = new Hit<Vector2D, float, TRenderingUnit>(origin, hitPoint, distance, renderedUnit);
+            hit = new Hit<Vector2D, float>(origin, hitPoint, distance);
             return true;
         }
         else
@@ -26,10 +26,9 @@ public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vecto
     /// Casts using the basic incremental method.
     /// </summary>
     /// <returns></returns>
-    public static bool CastIncremental(IMap<Vector2D, TRenderingUnit> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out TRenderingUnit renderedUnit, out float distance)
+    public static bool CastIncremental(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
     {
         hitPoint = default;
-        renderedUnit = default;
         distance = default;
         Vector2D directionVector = direction.Vector;
 
@@ -43,11 +42,10 @@ public class DiscreteRaycast<TRenderingUnit>(float stepSize) : ICastMethod<Vecto
                 return false;
             }
 
-            if (map.IsHit(hitCell, out TRenderingUnit unit))
+            if (map.IsHit(hitCell))
             {
                 distance = dist;
                 hitPoint = hit;
-                renderedUnit = unit;
                 return true;
             }
         }
