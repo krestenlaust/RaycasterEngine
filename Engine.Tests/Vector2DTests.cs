@@ -60,4 +60,21 @@ public class Vector2DTests
 
         Assert.AreEqual(expectedLength, actualLength);
     }
+
+    [DataRow(1, 1, 1, 1, true)]
+    [DataRow(0, 0, 0, 0, true)]
+    [DataRow(0, 1, 1, 0, false)]
+    [DataRow(1.5f, 1.5f, 1, 1, false)]
+    [DataRow(1.5f, 1.5f, 1.5f, 1.5f, true)]
+    [DataTestMethod]
+    public void TestComparisonOperator(float xA, float yA, float xB, float yB, bool equals)
+    {
+        Vector2D a = new(xA, yA);
+        Vector2D b = new(xB, yB);
+
+        Assert.AreEqual(a == b, equals);
+        Assert.AreEqual(a != b, !equals);
+        Assert.AreEqual(b == a, equals);
+        Assert.AreEqual(b != a, !equals);
+    }
 }
