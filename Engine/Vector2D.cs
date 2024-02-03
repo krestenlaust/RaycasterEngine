@@ -1,4 +1,6 @@
-﻿namespace Engine;
+﻿using System.Globalization;
+
+namespace Engine;
 
 public readonly struct Vector2D(float x, float y)
 {
@@ -22,6 +24,12 @@ public readonly struct Vector2D(float x, float y)
 
     public static bool operator !=(Vector2D vector1, Vector2D vector2) =>
         vector1.X != vector2.X || vector1.Y != vector2.Y;
+
+    public override string ToString()
+    {
+        CultureInfo info = CultureInfo.InvariantCulture;
+        return $"({X.ToString(info)}, {Y.ToString(info)})";
+    }
 
     public Vector2D Floor =>
         new(MathF.Floor(X), MathF.Floor(Y));

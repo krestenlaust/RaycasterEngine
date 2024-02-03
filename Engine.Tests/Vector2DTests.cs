@@ -77,4 +77,24 @@ public class Vector2DTests
         Assert.AreEqual(b == a, equals);
         Assert.AreEqual(b != a, !equals);
     }
+
+    [DataRow(0, 0, "(0, 0)")]
+    [DataRow(-0, -0, "(0, 0)")]
+    [DataRow(100, 0, "(100, 0)")]
+    [DataRow(0, 100, "(0, 100)")]
+    [DataRow(-10, 10, "(-10, 10)")]
+    [DataRow(10, -10, "(10, -10)")]
+    [DataRow(-10, -10, "(-10, -10)")]
+    [DataRow(-5.1f, 5.5f, "(-5.1, 5.5)")]
+    [DataRow(0, 1.5f, "(0, 1.5)")]
+    [DataTestMethod]
+    public void TestToStringImpl(float x, float y, string expectedResult)
+    {
+        Vector2D a = new(x, y);
+
+        string? converted = a.ToString();
+
+        Assert.IsNotNull(converted);
+        Assert.AreEqual(expectedResult, converted);
+    }
 }
