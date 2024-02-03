@@ -1,5 +1,7 @@
 ﻿namespace Engine.Camera;
 
-public class BasicCamera : ICamera
+/*
+public class BasicCamera<TCastMethod> : ICamera<TCastMethod,>
 {
 }
+*/
