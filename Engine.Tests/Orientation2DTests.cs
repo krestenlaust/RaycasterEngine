@@ -145,5 +145,20 @@ namespace Engine.Tests
             Assert.AreEqual(false, deg89);
             Assert.AreEqual(false, deg271);
         }
+
+        [DataRow(MathF.PI / 2, 0, 1)] // Orientation2D.Up
+        [DataRow(MathF.PI * 2 - MathF.PI / 2, 0, -1)] // Orientation2D.Down
+        [DataRow(MathF.PI, -1, 0)] // Orientation2D.Left
+        [DataRow(0, 1, 0)] // Orientation2D.Right
+        [DataTestMethod]
+        public void TestOrientation2DToVector(float orientationRad, float unitX, float unitY)
+        {
+            Orientation2D orientation = new(orientationRad);
+
+            Vector2D unitVector = orientation.Vector;
+
+            Assert.AreEqual(unitX, unitVector.X, 0.00001f);
+            Assert.AreEqual(unitY, unitVector.Y, 0.00001f);
+        }
     }
 }
