@@ -3,147 +3,78 @@ namespace Engine.Tests
     [TestClass]
     public class Orientation2DTests
     {
-        [TestMethod]
-        public void TestRadiansToDegreesNormal()
+        [DataRow(0, 0)]
+        [DataRow((float)Math.PI / 2, 90)]
+        [DataRow((float)Math.PI, 180)]
+        [DataRow((float)Math.PI / 2 * 3, 270)]
+        [DataRow((float)Math.PI * 2, 360)]
+        [DataRow((float)Math.PI * 3, 540)]
+        [DataRow(-(float)Math.PI, -180)]
+        [DataTestMethod]
+        public void TestRadiansToDegrees(float radians, float expectedDegrees)
         {
-            // Arrange
-            float radians0deg = 0;
-            float radians90deg = (float)Math.PI / 2;
-            float radians180deg = (float)Math.PI;
-            float radians270deg = ((float)Math.PI / 2) * 3;
-            
-            // Act
-            float degrees0 = new Orientation2D(radians0deg).Degrees;
-            float degrees90 = new Orientation2D(radians90deg).Degrees;
-            float degrees180 = new Orientation2D(radians180deg).Degrees;
-            float degrees270 = new Orientation2D(radians270deg).Degrees;
+            // Arrange & Act
+            float actualDegrees = new Orientation2D(radians).Degrees;
 
             // Assert
-            Assert.AreEqual(0, degrees0, 0.001f);
-            Assert.AreEqual(90, degrees90, 0.001f);
-            Assert.AreEqual(180, degrees180, 0.001f);
-            Assert.AreEqual(270, degrees270, 0.001f);
+            Assert.AreEqual(expectedDegrees, actualDegrees, 0.001f);
         }
 
-        [TestMethod]
-        public void TestRadiansToDegreesEdgeCases()
+        [DataRow(360, 0)]
+        [DataRow(540, 180)]
+        [DataRow(-180, 180)]
+        [DataTestMethod]
+        public void TestNormalize(float degrees, float expectedDegrees)
         {
-            // Arrange
-            float radians360deg = (float)Math.PI * 2;
-            float radians540deg = (float)Math.PI * 3;
-            float radiansNeg180deg = -(float)Math.PI;
-
-            // Act
-            float degrees360 = new Orientation2D(radians360deg).Degrees;
-            float degrees540 = new Orientation2D(radians540deg).Degrees;
-            float degreesNeg180 = new Orientation2D(radiansNeg180deg).Degrees;
+            // Arrange & Act
+            float actualDegrees = Orientation2D.FromDegrees(degrees).Normalized.Degrees;
 
             // Assert
-            Assert.AreEqual(360, degrees360, 0.001f);
-            Assert.AreEqual(540, degrees540, 0.001f);
-            Assert.AreEqual(-180, degreesNeg180, 0.001f);
+            Assert.AreEqual(expectedDegrees, actualDegrees, 0.001f);
         }
 
-        [TestMethod]
-        public void TestNormalize()
-        {
-            // Arrange
-            float radians360deg = (float)Math.PI * 2;
-            float radians540deg = (float)Math.PI * 3;
-            float radiansNeg180deg = -(float)Math.PI;
 
-            // Act
-            float degrees360 = new Orientation2D(radians360deg).Normalized.Degrees;
-            float degrees540 = new Orientation2D(radians540deg).Normalized.Degrees;
-            float degreesNeg180 = new Orientation2D(radiansNeg180deg).Normalized.Degrees;
+        [DataRow(0, 0)]
+        [DataRow(90, (float)Math.PI / 2)]
+        [DataRow(180, (float)Math.PI)]
+        [DataRow(270, (float)Math.PI / 2 * 3)]
+        [DataRow(360, (float)Math.PI * 2)]
+        [DataRow(540, (float)Math.PI * 3)]
+        [DataRow(-180, -(float)Math.PI)]
+        [DataTestMethod]
+        public void TestDegreesToRadians(float degree, float expectedRadians)
+        {
+            // Arrange & Act
+            float actualRadians = Orientation2D.FromDegrees(degree).Radians;
 
             // Assert
-            Assert.AreEqual(0, degrees360, 0.001f);
-            Assert.AreEqual(180, degrees540, 0.001f);
-            Assert.AreEqual(180, degreesNeg180, 0.001f);
+            Assert.AreEqual(expectedRadians, actualRadians, 0.001f);
         }
 
-        [TestMethod]
-        public void TestDegreesToRadiansNormal()
+        // TODO: Test values outside 0 and 360.
+        [DataRow(1, true)]
+        [DataRow(179, true)]
+        [DataRow(181, false)]
+        [DataRow(359, false)]
+        [DataTestMethod]
+        public void TestUpperhalfProperty(float degree, bool expectedUpperHalf)
         {
-            // Arrange
-            float degrees0 = 0;
-            float degrees90 = 90;
-            float degrees180 = 180;
-            float degrees270 = 270;
+            bool actualUpperHalf = Orientation2D.FromDegrees(degree).Upperhalf;
 
-            // Act
-            float radians0deg = Orientation2D.FromDegrees(degrees0).Radians;
-            float radians90deg = Orientation2D.FromDegrees(degrees90).Radians;
-            float radians180deg = Orientation2D.FromDegrees(degrees180).Radians;
-            float radians270deg = Orientation2D.FromDegrees(degrees270).Radians;
-
-            // Assert
-            Assert.AreEqual(0, radians0deg, 0.001f);
-            Assert.AreEqual((float)Math.PI / 2, radians90deg, 0.001f);
-            Assert.AreEqual((float)Math.PI, radians180deg, 0.001f);
-            Assert.AreEqual((float)Math.PI / 2 * 3, radians270deg, 0.001f);
+            Assert.AreEqual(expectedUpperHalf, actualUpperHalf);
         }
 
-        [TestMethod]
-        public void TestDegreesToRadiansEdgeCases()
+        // TODO: Test values outside 0 and 360.
+        [DataRow(91, true)]
+        [DataRow(269, true)]
+        [DataRow(89, false)]
+        [DataRow(271, false)]
+        [DataTestMethod]
+        public void TestLefthalfProperty(float degree, bool expectedLeftHalf)
         {
-            // Arrange
-            float degrees360 = 360;
-            float degrees540 = 540;
-            float degreesNeg180 = -180;
+            bool actualLefthalf = Orientation2D.FromDegrees(degree).Lefthalf;
 
-            // Act
-            float radians360deg = Orientation2D.FromDegrees(degrees360).Radians;
-            float radians540deg = Orientation2D.FromDegrees(degrees540).Radians;
-            float radiansNeg180deg = Orientation2D.FromDegrees(degreesNeg180).Radians;
-
-            // Assert
-            Assert.AreEqual((float)Math.PI * 2, radians360deg, 0.001f);
-            Assert.AreEqual((float)Math.PI * 3, radians540deg, 0.001f);
-            Assert.AreEqual(-(float)Math.PI, radiansNeg180deg, 0.001f);
-        }
-
-        [TestMethod]
-        public void TestUpperhalfProperty()
-        {
-            // I'm not testing values outside 0 and 360.
-
-            float upperhalf1deg = 1;
-            float upperhalf179deg = 179;
-            float lowerhalf181deg = 181;
-            float lowerHalf359deg = 359;
-
-            bool deg1 = Orientation2D.FromDegrees(upperhalf1deg).Upperhalf;
-            bool deg179 = Orientation2D.FromDegrees(upperhalf179deg).Upperhalf;
-            bool deg181 = Orientation2D.FromDegrees(lowerhalf181deg).Upperhalf;
-            bool deg359 = Orientation2D.FromDegrees(lowerHalf359deg).Upperhalf;
-
-            Assert.AreEqual(true, deg1);
-            Assert.AreEqual(true, deg179);
-            Assert.AreEqual(false, deg181);
-            Assert.AreEqual(false, deg359);
-        }
-
-        [TestMethod]
-        public void TestLefthalfProperty()
-        {
-            // I'm not testing values outside 0 and 360.
-
-            float lefthalf91deg = 91;
-            float lefthalf269deg = 269;
-            float righthalf89deg = 89;
-            float rightHalf271deg = 271;
-
-            bool deg91 = Orientation2D.FromDegrees(lefthalf91deg).Lefthalf;
-            bool deg269 = Orientation2D.FromDegrees(lefthalf269deg).Lefthalf;
-            bool deg89 = Orientation2D.FromDegrees(righthalf89deg).Lefthalf;
-            bool deg271 = Orientation2D.FromDegrees(rightHalf271deg).Lefthalf;
-
-            Assert.AreEqual(true, deg91);
-            Assert.AreEqual(true, deg269);
-            Assert.AreEqual(false, deg89);
-            Assert.AreEqual(false, deg271);
+            Assert.AreEqual(expectedLeftHalf, actualLefthalf);
         }
 
         [DataRow(MathF.PI / 2, 0, 1)] // Orientation2D.Up
