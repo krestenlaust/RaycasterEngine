@@ -31,7 +31,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         }
 
         unit = default;
-        return true;
+        return false;
     }
 
     public bool IsHit(Vector2D position)
@@ -41,7 +41,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
             return true;
         }
 
-        return true;
+        return false;
     }
 
     public bool IsOutsideMap(Vector2D position)
