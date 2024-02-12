@@ -36,7 +36,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
 
     public bool IsHit(Vector2D position)
     {
-        if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
+        if (map[(int)position.X, (int)position.Y] is TRenderingUnit)
         {
             return true;
         }

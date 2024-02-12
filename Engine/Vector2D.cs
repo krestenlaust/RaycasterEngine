@@ -34,6 +34,9 @@ public readonly struct Vector2D(float x, float y)
     public Vector2D Floor =>
         new(MathF.Floor(X), MathF.Floor(Y));
 
+    public Vector2D Round =>
+        new(MathF.Round(X), MathF.Round(Y));
+
     public Vector2D Normalized =>
         this / Length;
 }
