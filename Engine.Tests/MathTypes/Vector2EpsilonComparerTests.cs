@@ -1,4 +1,6 @@
-﻿namespace Engine.Tests;
+﻿using Engine.MathTypes;
+
+namespace Engine.Tests.MathTypes;
 
 [TestClass]
 public class Vector2EpsilonComparerTests

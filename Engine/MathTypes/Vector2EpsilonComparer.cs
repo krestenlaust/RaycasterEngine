@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace Engine;
+namespace Engine.MathTypes;
 
 public class Vector2EpsilonComparer(float epsilonValue) : IEqualityComparer<Vector2D>
 {

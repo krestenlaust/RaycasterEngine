@@ -1,6 +1,6 @@
-﻿using Engine.Tests.CastMethod;
+﻿using Engine.MathTypes;
 
-namespace Engine.Tests;
+namespace Engine.Tests.MathTypes;
 
 [TestClass]
 public class Vector2DTests

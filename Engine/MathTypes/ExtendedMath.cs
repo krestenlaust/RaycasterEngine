@@ -1,4 +1,4 @@
-﻿namespace Engine;
+﻿namespace Engine.MathTypes;
 
 public static class ExtendedMath
 {

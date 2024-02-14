@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-namespace Engine;
+namespace Engine.MathTypes;
 
 public readonly struct Vector2D(float x, float y)
 {

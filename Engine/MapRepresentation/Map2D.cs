@@ -1,4 +1,6 @@
-﻿namespace Engine.MapRepresentation;
+﻿using Engine.MathTypes;
+
+namespace Engine.MapRepresentation;
 
 public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     where TRenderingUnit : struct

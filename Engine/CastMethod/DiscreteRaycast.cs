@@ -1,4 +1,6 @@
-﻿namespace Engine.CastMethod;
+﻿using Engine.MathTypes;
+
+namespace Engine.CastMethod;
 
 /// <summary>
 /// Euclidian casting method, which simply takes a smal stepsize to look for hits.
