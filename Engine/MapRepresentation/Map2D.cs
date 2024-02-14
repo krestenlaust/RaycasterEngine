@@ -18,6 +18,9 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         this.map = map;
     }
 
+    private Vector2D ConvertPosition(Vector2D position) =>
+        new(MathF.Round(position.X), MathF.Round(position.Y));
+
     /// <summary>
     /// Return rendering unit, if it hits.
     /// </summary>
@@ -26,6 +29,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     /// <returns></returns>
     public bool Render(Vector2D position, out TRenderingUnit unit)
     {
+        position = ConvertPosition(position);
+
         if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
         {
             unit = retrivedUnit;
@@ -38,6 +43,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
 
     public bool IsHit(Vector2D position)
     {
+        position = ConvertPosition(position);
+
         if (map[(int)position.X, (int)position.Y] is TRenderingUnit)
         {
             return true;
@@ -48,6 +55,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
 
     public bool IsOutsideMap(Vector2D position)
     {
+        position = ConvertPosition(position);
+
         return position.X < 0 || position.X >= map.GetLength(0) ||
             position.Y < 0 || position.Y >= map.GetLength(1);
     }
