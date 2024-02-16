@@ -41,17 +41,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         return false;
     }
 
-    public bool IsHit(Vector2D position)
-    {
-        position = ConvertPosition(position);
-
-        if (map[(int)position.X, (int)position.Y] is TRenderingUnit)
-        {
-            return true;
-        }
-
-        return false;
-    }
+    public bool IsHit(Vector2D position) =>
+        Render(position, out _);
 
     public bool IsOutsideMap(Vector2D position)
     {
