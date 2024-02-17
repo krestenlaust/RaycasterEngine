@@ -36,18 +36,17 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
 
         for (float dist = 0; dist < maxDistance; dist += stepSize)
         {
-            Vector2D hit = directionVector * dist + origin;
-            Vector2D hitCell = hit.Round;
+            Vector2D point = directionVector * dist + origin;
 
-            if (map.IsOutsideMap(hitCell))
+            if (map.IsOutsideMap(point))
             {
                 return false;
             }
 
-            if (map.IsHit(hitCell))
+            if (map.IsHit(point))
             {
                 distance = dist;
-                hitPoint = hit;
+                hitPoint = point;
                 return true;
             }
         }
