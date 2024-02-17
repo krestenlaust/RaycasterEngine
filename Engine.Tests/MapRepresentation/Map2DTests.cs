@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace Engine.Tests.MapRepresentation;
+﻿namespace Engine.Tests.MapRepresentation;
 
 [TestClass]
 public class Map2DTests

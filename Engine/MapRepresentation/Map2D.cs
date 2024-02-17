@@ -8,7 +8,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     readonly TRenderingUnit?[,] map;
 
     /// <summary>
-    /// Instantiates a Map2D with a particular map. Null signifies nothing.
+    /// Initializes a new instance of the <see cref="Map2D{TRenderingUnit}"/> class with a particular map.
+    /// Null signifies nothing.
     /// </summary>
     /// <param name="map"></param>
     public Map2D(TRenderingUnit?[,] map)
@@ -17,12 +18,6 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
 
         this.map = map;
     }
-
-    Vector2D GetCorrectlyMappedCell(Vector2D position) =>
-        new(
-            position.X,
-            map.GetLength(1) - 1 - position.Y
-            );
 
     /// <summary>
     /// Return rendering unit, if it hits.
@@ -54,4 +49,9 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         return position.X < 0 || position.X >= map.GetLength(0) ||
             position.Y < 0 || position.Y >= map.GetLength(1);
     }
+
+    Vector2D GetCorrectlyMappedCell(Vector2D position) =>
+        new (
+            position.X,
+            map.GetLength(1) - 1 - position.Y);
 }
