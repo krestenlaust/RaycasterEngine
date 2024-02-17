@@ -9,6 +9,7 @@ public class Perspective1DCameraPattern<TCastMethod, TPosition, TLength>(Orienta
 
     public int SampleSize { get; set; } = sampleSize;
 
+    /// <inheritdoc/>
     public IEnumerable<Hit<TPosition, TLength>?> Render(IHitMap<TPosition> map, TCastMethod caster, TPosition origin, Orientation2D orientation, TLength renderDistance)
     {
         float startRadians = orientation.Radians - (FieldOfView.Radians / 2);
