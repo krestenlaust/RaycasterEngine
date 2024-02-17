@@ -19,12 +19,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         this.map = map;
     }
 
-    /// <summary>
-    /// Return rendering unit, if it hits.
-    /// </summary>
-    /// <param name="position"></param>
-    /// <param name="unit"></param>
-    /// <returns></returns>
+    /// <inheritdoc/>
     public bool Render(Vector2D position, out TRenderingUnit unit)
     {
         position = GetCorrectlyMappedCell(position.GetCartesianCell());
