@@ -1,5 +1,4 @@
-﻿using Engine.MapRepresentation;
-using Engine.MathTypes;
+﻿using Engine.MathTypes;
 
 namespace Engine.Tests.CastMethod;
 

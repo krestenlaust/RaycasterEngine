@@ -7,19 +7,20 @@ public readonly struct Vector2D(float x, float y)
     readonly static int GridTolerance = 3;
 
     public float X { get; } = x;
+
     public float Y { get; } = y;
 
     public float Length =>
         MathF.Sqrt(X * X + Y * Y);
 
     public static Vector2D operator *(Vector2D vector, float factor) =>
-        new(vector.X * factor, vector.Y * factor);
+        new (vector.X * factor, vector.Y * factor);
 
     public static Vector2D operator /(Vector2D vector, float divisor) =>
-        new(vector.X / divisor, vector.Y / divisor);
+        new (vector.X / divisor, vector.Y / divisor);
 
     public static Vector2D operator +(Vector2D vector1, Vector2D vector2) =>
-        new(vector1.X + vector2.X, vector1.Y + vector2.Y);
+        new (vector1.X + vector2.X, vector1.Y + vector2.Y);
 
     public static bool operator ==(Vector2D vector1, Vector2D vector2) =>
         vector1.X == vector2.X && vector1.Y == vector2.Y;
@@ -34,10 +35,10 @@ public readonly struct Vector2D(float x, float y)
     }
 
     public Vector2D Floor =>
-        new(MathF.Floor(X), MathF.Floor(Y));
+        new (MathF.Floor(X), MathF.Floor(Y));
 
     public Vector2D Round =>
-        new(MathF.Round(X), MathF.Round(Y));
+        new (MathF.Round(X), MathF.Round(Y));
 
     public Vector2D Normalized =>
         this / Length;
@@ -47,7 +48,7 @@ public readonly struct Vector2D(float x, float y)
     /// </summary>
     /// <returns></returns>
     public Vector2D GetCartesianCell(int roundingToleranceDigits) =>
-        new(
+        new (
             MathF.Floor(MathF.Round(X, roundingToleranceDigits)),
             MathF.Floor(MathF.Round(Y, roundingToleranceDigits))
             );
