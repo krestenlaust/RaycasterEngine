@@ -39,9 +39,11 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         return false;
     }
 
+    /// <inheritdoc/>
     public bool IsHit(Vector2D position) =>
         Render(position, out _);
 
+    /// <inheritdoc/>
     public bool IsOutsideMap(Vector2D position)
     {
         position = GetCorrectlyMappedCell(position.GetCartesianCell());
