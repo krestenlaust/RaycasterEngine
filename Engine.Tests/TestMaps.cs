@@ -25,9 +25,9 @@ public static class TestMaps
 
     public static readonly IHitMap<Vector2D> Map4x4EveryOtherColumn = new Map2D<int>(new int?[,]
     {
-        { null, 1, null, 1 },
-        { null, 1, null, 1 },
-        { null, 1, null, 1 },
-        { null, 1, null, 1 },
+        { null, null, null, null },
+        { 1, 1, 1, 1 },
+        { null, null, null, null },
+        { 1, 1, 1, 1 },
     });
 }
