@@ -10,6 +10,7 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
 {
     public float StepSize { get; set; } = stepSize;
 
+    /// <inheritdoc/>
     public bool Cast(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
         if (CastIncremental(map, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out float distance))
@@ -24,11 +25,7 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
         }
     }
 
-    /// <summary>
-    /// Casts using the basic incremental method.
-    /// </summary>
-    /// <returns></returns>
-    public static bool CastIncremental(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
+    static bool CastIncremental(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
     {
         hitPoint = default;
         distance = default;
@@ -36,7 +33,7 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
 
         for (float dist = 0; dist < maxDistance; dist += stepSize)
         {
-            Vector2D point = directionVector * dist + origin;
+            Vector2D point = (directionVector * dist) + origin;
 
             if (map.IsOutsideMap(point))
             {
