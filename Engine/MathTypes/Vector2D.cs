@@ -1,9 +1,11 @@
 ﻿using System.Globalization;
 
-namespace Engine;
+namespace Engine.MathTypes;
 
 public readonly struct Vector2D(float x, float y)
 {
+    readonly static int GridTolerance = 3;
+
     public float X { get; } = x;
     public float Y { get; } = y;
 
@@ -34,6 +36,25 @@ public readonly struct Vector2D(float x, float y)
     public Vector2D Floor =>
         new(MathF.Floor(X), MathF.Floor(Y));
 
+    public Vector2D Round =>
+        new(MathF.Round(X), MathF.Round(Y));
+
     public Vector2D Normalized =>
         this / Length;
+
+    /// <summary>
+    /// Accounts for floating-point errors, and floors the position to a cartesian cell.
+    /// </summary>
+    /// <returns></returns>
+    public Vector2D GetCartesianCell(int roundingToleranceDigits) =>
+        new(
+            MathF.Floor(MathF.Round(X, roundingToleranceDigits)),
+            MathF.Floor(MathF.Round(Y, roundingToleranceDigits))
+            );
+
+    /// <summary>
+    /// Accounts for floating-point errors rounding down to 3 significant digits, and floors the position to a cartesian whole cell.
+    /// </summary>
+    /// <returns></returns>
+    public Vector2D GetCartesianCell() => GetCartesianCell(GridTolerance);
 }

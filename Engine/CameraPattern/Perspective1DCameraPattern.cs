@@ -1,4 +1,6 @@
-﻿namespace Engine.CameraPattern;
+﻿using Engine.MathTypes;
+
+namespace Engine.CameraPattern;
 
 public class Perspective1DCameraPattern<TCastMethod, TPosition, TLength>(Orientation2D fieldOfView, int sampleSize) : ICameraPattern<TCastMethod, TPosition, Orientation2D, TLength>
     where TCastMethod : ICastMethod<TPosition, Orientation2D, TLength>

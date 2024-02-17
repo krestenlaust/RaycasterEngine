@@ -1,4 +1,6 @@
-﻿namespace Engine.CastMethod;
+﻿using Engine.MathTypes;
+
+namespace Engine.CastMethod;
 
 /// <summary>
 /// Euclidian casting method, cast a ray using Digital Differential Analyzer.

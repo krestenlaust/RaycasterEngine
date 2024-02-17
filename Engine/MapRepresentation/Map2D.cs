@@ -1,4 +1,6 @@
-﻿namespace Engine.MapRepresentation;
+﻿using Engine.MathTypes;
+
+namespace Engine.MapRepresentation;
 
 public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     where TRenderingUnit : struct
@@ -16,6 +18,12 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         this.map = map;
     }
 
+    Vector2D GetCorrectlyMappedCell(Vector2D position) =>
+        new(
+            position.X,
+            map.GetLength(1) - 1 - position.Y
+            );
+
     /// <summary>
     /// Return rendering unit, if it hits.
     /// </summary>
@@ -24,6 +32,8 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     /// <returns></returns>
     public bool Render(Vector2D position, out TRenderingUnit unit)
     {
+        position = GetCorrectlyMappedCell(position.GetCartesianCell());
+
         if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
         {
             unit = retrivedUnit;
@@ -31,21 +41,16 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         }
 
         unit = default;
-        return true;
+        return false;
     }
 
-    public bool IsHit(Vector2D position)
-    {
-        if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
-        {
-            return true;
-        }
-
-        return true;
-    }
+    public bool IsHit(Vector2D position) =>
+        Render(position, out _);
 
     public bool IsOutsideMap(Vector2D position)
     {
+        position = GetCorrectlyMappedCell(position.GetCartesianCell());
+
         return position.X < 0 || position.X >= map.GetLength(0) ||
             position.Y < 0 || position.Y >= map.GetLength(1);
     }

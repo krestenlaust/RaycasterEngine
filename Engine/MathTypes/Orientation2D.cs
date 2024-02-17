@@ -1,6 +1,4 @@
-﻿using System.Numerics;
-
-namespace Engine;
+﻿namespace Engine.MathTypes;
 
 /// <summary>
 /// Orientation based around the positive first-axis, going counterclockwise.
@@ -36,13 +34,13 @@ public readonly struct Orientation2D(float radians)
         new(ExtendedMath.Modulo(Radians, FullRotation.Radians));
 
     public float Degrees =>
-        (180 / MathF.PI) * Radians;
+        180 / MathF.PI * Radians;
 
     public bool Upperhalf =>
         Normalized.Radians < MathF.PI;
 
     public bool Lefthalf =>
-        new Orientation2D(Radians - (FullRotation.Radians / 4)).Upperhalf;
+        new Orientation2D(Radians - FullRotation.Radians / 4).Upperhalf;
 
     public Vector2D Vector =>
         new(MathF.Cos(Radians), MathF.Sin(Radians));
