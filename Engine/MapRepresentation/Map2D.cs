@@ -18,8 +18,11 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         this.map = map;
     }
 
-    private Vector2D ConvertPosition(Vector2D position) =>
-        new(MathF.Round(position.X), MathF.Round(position.Y));
+    Vector2D GetCorrectlyMappedCell(Vector2D position) =>
+        new(
+            position.X,
+            map.GetLength(1) - 1 - position.Y
+            );
 
     /// <summary>
     /// Return rendering unit, if it hits.
@@ -29,7 +32,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     /// <returns></returns>
     public bool Render(Vector2D position, out TRenderingUnit unit)
     {
-        position = ConvertPosition(position);
+        position = GetCorrectlyMappedCell(position.GetCartesianCell());
 
         if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
         {
@@ -46,7 +49,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
 
     public bool IsOutsideMap(Vector2D position)
     {
-        position = ConvertPosition(position);
+        position = GetCorrectlyMappedCell(position.GetCartesianCell());
 
         return position.X < 0 || position.X >= map.GetLength(0) ||
             position.Y < 0 || position.Y >= map.GetLength(1);
