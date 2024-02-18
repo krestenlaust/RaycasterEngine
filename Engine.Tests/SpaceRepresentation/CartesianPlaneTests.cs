@@ -1,7 +1,7 @@
 ﻿namespace Engine.Tests.SpaceRepresentation;
 
 [TestClass]
-public class Map2DTests
+public class CartesianPlaneTests
 {
     [DataRow(0, 0, false)]
     [DataRow(1, 1, true)]

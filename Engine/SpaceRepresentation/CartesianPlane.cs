@@ -2,17 +2,17 @@
 
 namespace Engine.SpaceRepresentation;
 
-public class Map2D<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingUnit>
+public class CartesianPlane<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingUnit>
     where TRenderingUnit : struct
 {
     readonly TRenderingUnit?[,] space;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Map2D{TRenderingUnit}"/> class with a particular space.
+    /// Initializes a new instance of the <see cref="CartesianPlane{TRenderingUnit}"/> class with a particular space.
     /// Null signifies nothing.
     /// </summary>
     /// <param name="space"></param>
-    public Map2D(TRenderingUnit?[,] space)
+    public CartesianPlane(TRenderingUnit?[,] space)
     {
         ArgumentNullException.ThrowIfNull(space);
 
