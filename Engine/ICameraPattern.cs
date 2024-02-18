@@ -12,5 +12,14 @@
 public interface ICameraPattern<TCastMethod, TPosition, in TAngle, TLength>
     where TCastMethod : ICastMethod<TPosition, TAngle, TLength>
 {
+    /// <summary>
+    /// Renders the scene using the provided cast method.
+    /// </summary>
+    /// <param name="map">The space to render.</param>
+    /// <param name="caster">The method to utilize in rendering.</param>
+    /// <param name="origin">The origin of perspective of the rendering.</param>
+    /// <param name="orientation">The absolute orientation of the perspective.</param>
+    /// <param name="renderDistance">The constraint of distance of the render.</param>
+    /// <returns>Every cast ray, each None if hits nothing, Some if hits. Some provides information about hit.</returns>
     IEnumerable<Hit<TPosition, TLength>?> Render(IHitMap<TPosition> map, TCastMethod caster, TPosition origin, TAngle orientation, TLength renderDistance);
 }
