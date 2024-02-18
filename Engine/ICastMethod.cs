@@ -9,5 +9,5 @@
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
 public interface ICastMethod<TPosition, in TAngle, TLength>
 {
-    bool Cast(IHitMap<TPosition> map, TPosition origin, TAngle direction, TLength maxDistance, out Hit<TPosition, TLength>? hit);
+    bool Cast(IHitSpace<TPosition> space, TPosition origin, TAngle direction, TLength maxDistance, out Hit<TPosition, TLength>? hit);
 }

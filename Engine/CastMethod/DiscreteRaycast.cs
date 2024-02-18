@@ -11,9 +11,9 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
     public float StepSize { get; set; } = stepSize;
 
     /// <inheritdoc/>
-    public bool Cast(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
+    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
-        if (CastIncremental(map, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out float distance))
+        if (CastIncremental(space, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out float distance))
         {
             hit = new Hit<Vector2D, float>(origin, hitPoint, distance);
             return true;
@@ -25,7 +25,7 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
         }
     }
 
-    static bool CastIncremental(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
+    static bool CastIncremental(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
     {
         hitPoint = default;
         distance = default;
@@ -35,12 +35,12 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
         {
             Vector2D point = (directionVector * dist) + origin;
 
-            if (map.IsOutsideMap(point))
+            if (space.IsOutsideSpace(point))
             {
                 return false;
             }
 
-            if (map.IsHit(point))
+            if (space.IsHit(point))
             {
                 distance = dist;
                 hitPoint = point;

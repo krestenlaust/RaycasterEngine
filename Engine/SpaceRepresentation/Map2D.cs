@@ -1,22 +1,22 @@
 ﻿using Engine.MathTypes;
 
-namespace Engine.MapRepresentation;
+namespace Engine.SpaceRepresentation;
 
-public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
+public class Map2D<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingUnit>
     where TRenderingUnit : struct
 {
-    readonly TRenderingUnit?[,] map;
+    readonly TRenderingUnit?[,] space;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="Map2D{TRenderingUnit}"/> class with a particular map.
+    /// Initializes a new instance of the <see cref="Map2D{TRenderingUnit}"/> class with a particular space.
     /// Null signifies nothing.
     /// </summary>
-    /// <param name="map"></param>
-    public Map2D(TRenderingUnit?[,] map)
+    /// <param name="space"></param>
+    public Map2D(TRenderingUnit?[,] space)
     {
-        ArgumentNullException.ThrowIfNull(map);
+        ArgumentNullException.ThrowIfNull(space);
 
-        this.map = map;
+        this.space = space;
     }
 
     /// <inheritdoc/>
@@ -24,7 +24,7 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
     {
         position = GetCorrectlyMappedCell(position.GetCartesianCell());
 
-        if (map[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
+        if (space[(int)position.X, (int)position.Y] is TRenderingUnit retrivedUnit)
         {
             unit = retrivedUnit;
             return true;
@@ -39,16 +39,16 @@ public class Map2D<TRenderingUnit> : IRenderMap<Vector2D, TRenderingUnit>
         Render(position, out _);
 
     /// <inheritdoc/>
-    public bool IsOutsideMap(Vector2D position)
+    public bool IsOutsideSpace(Vector2D position)
     {
         position = GetCorrectlyMappedCell(position.GetCartesianCell());
 
-        return position.X < 0 || position.X >= map.GetLength(0) ||
-            position.Y < 0 || position.Y >= map.GetLength(1);
+        return position.X < 0 || position.X >= space.GetLength(0) ||
+            position.Y < 0 || position.Y >= space.GetLength(1);
     }
 
     Vector2D GetCorrectlyMappedCell(Vector2D position) =>
         new (
             position.X,
-            map.GetLength(1) - 1 - position.Y);
+            space.GetLength(1) - 1 - position.Y);
 }

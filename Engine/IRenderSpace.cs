@@ -1,11 +1,11 @@
 ﻿namespace Engine;
 
 /// <summary>
-/// Represents a space that is represented by instances of <see cref="TRenderingUnit"/> for projection.
+/// Represents a space of <see cref="TRenderingUnit"/>-instances for projection.
 /// </summary>
 /// <typeparam name="TPosition">The spacial type to utilize, e.g. <see cref="MathTypes.Vector2D"/> for standard cartesian coordinate.</typeparam>
 /// <typeparam name="TRenderingUnit">The unit to represent what a raycaster sees.</typeparam>
-public interface IRenderMap<in TPosition, TRenderingUnit> : IHitMap<TPosition>
+public interface IRenderSpace<in TPosition, TRenderingUnit> : IHitSpace<TPosition>
 {
     /// <summary>
     /// Renders a particular point in space.

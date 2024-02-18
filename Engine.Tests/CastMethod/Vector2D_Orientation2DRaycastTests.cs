@@ -21,7 +21,7 @@ public abstract class Vector2D_Orientation2DRaycastTests(ICastMethod<Vector2D, O
         Vector2D expectedPoint = new(xPoint, yPoint);
         Vector2D origin = new(xOrigin, yOrigin);
 
-        bool castHit = cast.Cast(TestMaps.Map5x5Bordered, origin, Orientation2D.UpRotation, 5, out Hit<Vector2D, float>? hit);
+        bool castHit = cast.Cast(TestSpaces.Space5x5Bordered, origin, Orientation2D.UpRotation, 5, out Hit<Vector2D, float>? hit);
 
         Assert.IsTrue(castHit);
         Assert.IsNotNull(hit);

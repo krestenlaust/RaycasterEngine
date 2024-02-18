@@ -24,7 +24,7 @@ public class Perspective1DCameraPattern<TCastMethod, TPosition, TLength>(Orienta
     public int SampleSize { get; set; } = sampleSize;
 
     /// <inheritdoc/>
-    public IEnumerable<Hit<TPosition, TLength>?> Render(IHitMap<TPosition> map, TCastMethod caster, TPosition origin, Orientation2D orientation, TLength renderDistance)
+    public IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, Orientation2D orientation, TLength renderDistance)
     {
         float startRadians = orientation.Radians - (FieldOfView.Radians / 2);
         float stepSizeRadians = FieldOfView.Radians / SampleSize;
@@ -33,7 +33,7 @@ public class Perspective1DCameraPattern<TCastMethod, TPosition, TLength>(Orienta
         {
             var currentDirection = new Orientation2D(startRadians + (stepSizeRadians * i));
 
-            if (caster.Cast(map, origin, currentDirection, renderDistance, out Hit<TPosition, TLength>? hit))
+            if (caster.Cast(space, origin, currentDirection, renderDistance, out Hit<TPosition, TLength>? hit))
             {
                 yield return hit;
             }

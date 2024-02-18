@@ -10,7 +10,7 @@ namespace Engine.CastMethod;
 public class DDARaycast : ICastMethod<Vector2D, Orientation2D, float>
 {
     /// <inheritdoc/>
-    public bool Cast(IHitMap<Vector2D> map, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
+    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
         // Calculate offset to nearby grid.
         // Extrapolate position by grid unit, till something is hit.

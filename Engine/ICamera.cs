@@ -2,7 +2,7 @@
 
 /// <summary>
 /// This entity utilizes a <see cref="ICameraPattern{TCastMethod, TPosition, TAngle, TLength}"/>,
-/// to project a <see cref="IRenderMap{TPosition, TRenderingUnit}"/> into another space.
+/// to project a <see cref="IRenderSpace{TPosition, TRenderingUnit}"/> into another space.
 /// </summary>
 /// <typeparam name="TCastMethod">The casting method to utilize, e.g. <see cref="CastMethod.DiscreteRaycast"/> for standard euclidean iterative line casting.</typeparam>
 /// <typeparam name="TCameraPattern">The camera casting pattern to utilize, describes the way the camera casts its rays. E.g. <see cref="CameraPattern.Perspective1DCameraPattern{TCastMethod, TPosition, TLength}"/> to cast into 1D.</typeparam>
