@@ -2,6 +2,10 @@
 
 namespace Engine.SpaceRepresentation;
 
+/// <summary>
+/// Represents a 2D mapping of rendering units.
+/// </summary>
+/// <typeparam name="TRenderingUnit">The unit to represent a rendering atom.</typeparam>
 public class CartesianPlane<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingUnit>
     where TRenderingUnit : struct
 {
@@ -11,7 +15,7 @@ public class CartesianPlane<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingU
     /// Initializes a new instance of the <see cref="CartesianPlane{TRenderingUnit}"/> class with a particular space.
     /// Null signifies nothing.
     /// </summary>
-    /// <param name="space"></param>
+    /// <param name="space">The instance of the 2D mapping to rendering units.</param>
     public CartesianPlane(TRenderingUnit?[,] space)
     {
         ArgumentNullException.ThrowIfNull(space);
