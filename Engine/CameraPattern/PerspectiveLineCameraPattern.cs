@@ -10,7 +10,7 @@ namespace Engine.CameraPattern;
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
 /// <param name="fieldOfView">The field of view, of the camera pattern.</param>
 /// <param name="sampleSize">The amount of samples to take within the field of view.</param>
-public class Perspective1DCameraPattern<TCastMethod, TPosition, TLength>(Orientation2D fieldOfView, int sampleSize) : ICameraPattern<TCastMethod, TPosition, Orientation2D, TLength>
+public class PerspectiveLineCameraPattern<TCastMethod, TPosition, TLength>(Orientation2D fieldOfView, int sampleSize) : ICameraPattern<TCastMethod, TPosition, Orientation2D, TLength>
     where TCastMethod : ICastMethod<TPosition, Orientation2D, TLength>
 {
     /// <summary>
