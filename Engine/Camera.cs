@@ -1,4 +1,7 @@
-﻿namespace Engine;
+﻿using Engine;
+using Engine.MathTypes;
+
+namespace EngineImpl;
 
 /// <summary>
 /// This entity utilizes a <see cref="ICameraPattern{TCastMethod, TPosition, TAngle, TLength}"/>,
@@ -10,8 +13,23 @@
 /// <typeparam name="TAngle">The angular type to utilize, e.g. <see cref="MathTypes.Orientation2D"/> for basic euclidean orientational properties.</typeparam>
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
 /// <typeparam name="TRenderingUnit">The unit to represent what a raycaster sees.</typeparam>
-public interface ICamera<TCastMethod, TCameraPattern, TPosition, in TAngle, TLength, TRenderingUnit>
+/// <param name="cameraPattern">The provided camera pattern for the camera to utilize.</param>
+/// <param name="castMethod">The provided casting method for the camera to utilize.</param>
+public class Camera<TCastMethod, TCameraPattern, TPosition, TAngle, TLength, TRenderingUnit>(TCameraPattern cameraPattern, TCastMethod castMethod)
     where TCastMethod : ICastMethod<TPosition, TAngle, TLength>
     where TCameraPattern : ICameraPattern<TCastMethod, TPosition, TAngle, TLength>
 {
+    /// <summary>
+    /// Gets or sets the camera pattern for the camera to utilize.
+    /// </summary>
+    public TCameraPattern CameraPattern { get; set; } = cameraPattern;
+
+    /// <summary>
+    /// Gets or sets the casting method for the camera to utilize.
+    /// </summary>
+    public TCastMethod CastMethod { get; set; } = castMethod;
+
+    public Orientation2D Orientation { get; set; }
+
+    public Vector2D Position { get; set; }
 }
