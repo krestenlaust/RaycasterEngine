@@ -15,9 +15,11 @@ namespace EngineImpl;
 /// <typeparam name="TRenderingUnit">The unit to represent what a raycaster sees.</typeparam>
 /// <param name="cameraPattern">The provided camera pattern for the camera to utilize.</param>
 /// <param name="castMethod">The provided casting method for the camera to utilize.</param>
-public class Camera<TCastMethod, TCameraPattern, TPosition, TAngle, TLength, TRenderingUnit>(TCameraPattern cameraPattern, TCastMethod castMethod)
+public class Camera<TCastMethod, TCameraPattern, TPosition, TAngle, TLength, TRenderingUnit>(TCameraPattern cameraPattern, TCastMethod castMethod, TLength renderDistance)
     where TCastMethod : ICastMethod<TPosition, TAngle, TLength>
     where TCameraPattern : ICameraPattern<TCastMethod, TPosition, TAngle, TLength>
+    where TPosition : struct
+    where TAngle : struct
 {
     /// <summary>
     /// Gets or sets the camera pattern for the camera to utilize.
@@ -29,7 +31,17 @@ public class Camera<TCastMethod, TCameraPattern, TPosition, TAngle, TLength, TRe
     /// </summary>
     public TCastMethod CastMethod { get; set; } = castMethod;
 
-    public Orientation2D Orientation { get; set; }
+    public TLength RenderDistance { get; set; } = renderDistance;
 
-    public Vector2D Position { get; set; }
+    public TAngle Orientation { get; set; } = default;
+
+    public TPosition Position { get; set; } = default;
+
+    /// <summary>
+    /// Renders the scene using the provided cast method.
+    /// </summary>
+    /// <param name="space">The space to render.</param>
+    /// <returns>Every cast ray, each None if hits nothing, Some if hits. Some provides information about hit.</returns>
+    public IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space) =>
+        CameraPattern.Render(space, CastMethod, Position, Orientation, RenderDistance);
 }
