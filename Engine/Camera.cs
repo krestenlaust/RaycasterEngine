@@ -1,7 +1,4 @@
-﻿using Engine;
-using Engine.MathTypes;
-
-namespace EngineImpl;
+﻿namespace Engine;
 
 /// <summary>
 /// This entity utilizes a <see cref="ICameraPattern{TCastMethod, TPosition, TAngle, TLength}"/>,
