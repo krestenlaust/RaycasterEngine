@@ -23,6 +23,16 @@ public class CartesianPlane<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingU
         this.space = space;
     }
 
+    /// <summary>
+    /// Gets the width of the allocated space.
+    /// </summary>
+    public int Width { get => space.GetLength(0); }
+
+    /// <summary>
+    /// Gets the height of the allocated space.
+    /// </summary>
+    public int Height { get => space.GetLength(1); }
+
     /// <inheritdoc/>
     public bool Render(Vector2D position, out TRenderingUnit unit)
     {
