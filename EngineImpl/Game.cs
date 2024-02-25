@@ -51,6 +51,7 @@ public class Game
 
     public void Tick()
     {
+        RenderMap();
 
         int displayWidth = Console.WindowWidth;
         int displayHeight = Console.WindowHeight;
@@ -105,5 +106,28 @@ public class Game
                 break;
         }
         Console.Clear();
+    }
+
+    void RenderMap()
+    {
+        for (int y = 0; y < 5; y++)
+        {
+            for (int x = 0; x < 5; x++)
+            {
+                Console.SetCursorPosition(x, y);
+
+                if (Map.Render(new Vector2D(x, y), out char rendered))
+                {
+                    Console.Write(rendered);
+                }
+                else
+                {
+                    Console.Write(' ');
+                }
+            }
+        }
+
+        Console.SetCursorPosition((int)player.Position.Floor.X, (int)player.Position.Floor.Y);
+        Console.Write('*');
     }
 }
