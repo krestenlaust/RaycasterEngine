@@ -6,7 +6,7 @@ using Engine.MathTypes;
 
 namespace EngineImpl;
 
-public class RaycastWindow : IWindow
+public class RaycastWindow(IRenderSpace<Vector2D, char> mapToRaycast) : IWindow
 {
     public readonly Camera<DiscreteRaycast,
        PerspectiveLineCameraPattern<
@@ -16,11 +16,7 @@ public class RaycastWindow : IWindow
        Vector2D,
        Orientation2D,
        float,
-       char> Camera;
-
-    public RaycastWindow(IRenderSpace<Vector2D, char> mapToRaycast)
-    {
-        Camera =
+       char> Camera =
             new Camera<
                 DiscreteRaycast,
                 PerspectiveLineCameraPattern<
@@ -37,10 +33,7 @@ public class RaycastWindow : IWindow
                     float>
                     (Orientation2D.FromDegrees(90), 10), new DiscreteRaycast(0.05f), 10);
 
-        MapToRaycast = mapToRaycast;
-    }
-
-    public IRenderSpace<Vector2D, char> MapToRaycast { get; set; }
+    public IRenderSpace<Vector2D, char> MapToRaycast { get; set; } = mapToRaycast;
 
     public int Width => Console.WindowWidth;
 
