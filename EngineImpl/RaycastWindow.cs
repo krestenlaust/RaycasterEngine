@@ -61,13 +61,28 @@ public class RaycastWindow(IRenderSpace<Vector2D, char> mapToRaycast) : IWindow
                 continue;
             }
 
-            int renderHeight = (int)((1 / ray.Value.Distance) * 9) + 1;
+            int maxWallRenderHeight = Height;
 
-            if (MapToRaycast.Render(ray.Value.Point, out char renderedUnit))
+            int wallRenderHeight = (int)((1 / ray.Value.Distance) * maxWallRenderHeight);
+
+            // Get character to render
+            if (!MapToRaycast.Render(ray.Value.Point, out char renderedUnit))
             {
-                region[indexY, indexX] = renderedUnit;
+                continue;
+            }
 
-                region[indexY + 1, indexX] = renderHeight.ToString()[0];
+            int renderStart = Height / 2 - wallRenderHeight / 2;
+            int renderEnd = renderStart + wallRenderHeight;
+
+            for (int y = 0; y < Height; y++)
+            {
+                if (y < renderStart || y > renderEnd)
+                {
+                    region[y, indexX] = ' ';
+                    continue;
+                }
+
+                region[y, indexX] = renderedUnit;
             }
         }
     }
