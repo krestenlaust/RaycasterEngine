@@ -9,15 +9,22 @@ internal class Program
 
     static void Main(string[] args)
     {
-        var game = new Game();
         Console.CursorVisible = false;
 
         Stopwatch sw = new Stopwatch();
 
+        int windowWidth = Console.WindowWidth;
+        int windowHeight = Console.WindowHeight - 1;
+
+        var game = new Game(windowWidth, windowHeight);
+
         while (true)
         {
-            int windowWidth = Console.WindowWidth;
-            int windowHeight = Console.WindowHeight - 1;
+            windowWidth = Console.WindowWidth;
+            windowHeight = Console.WindowHeight - 1;
+
+            game.Width = windowWidth;
+            game.Height = windowHeight;
 
             if (internalScreenBuffer.Length != windowWidth * windowHeight)
             {

@@ -19,18 +19,21 @@ public class Game : IWindow
     readonly RaycastWindow raycastWindow;
     readonly MinimapWindow minimapWindow;
 
-    public Game()
+    public Game(int width, int height)
     {
-        raycastWindow = new RaycastWindow(map);
+        this.Width = width;
+        this.Height = height;
+
+        raycastWindow = new RaycastWindow(width, height, map);
         minimapWindow = new MinimapWindow(map);
 
         renderedWindows.Add(((0, 0), raycastWindow));
         renderedWindows.Add(((0, 0), minimapWindow));
     }
 
-    public int Width => Console.WindowWidth;
+    public int Width { get; set; }
 
-    public int Height => Console.WindowHeight - 1;
+    public int Height { get; set; }
 
     public void Render(Span2D<char> region)
     {
