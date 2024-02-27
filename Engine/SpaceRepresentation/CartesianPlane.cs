@@ -55,7 +55,7 @@ public class CartesianPlane<TRenderingUnit> : IRenderSpace<Vector2D, TRenderingU
     /// <inheritdoc/>
     public bool IsOutsideSpace(Vector2D position)
     {
-        position = GetCorrectlyMappedCell(position.GetCartesianCell());
+        position = GetCorrectlyMappedCell(position);
 
         return position.X < 0 || position.X >= space.GetLength(0) ||
             position.Y < 0 || position.Y >= space.GetLength(1);
