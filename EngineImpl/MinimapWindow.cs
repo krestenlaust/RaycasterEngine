@@ -30,6 +30,13 @@ public class MinimapWindow(CartesianPlane<char> map) : IWindow
             }
         }
 
-        region[(int)PlayerLocation.Round.Y, (int)PlayerLocation.Round.X] = '*';
+        Vector2D starLocation = PlayerLocation.Round;
+
+        if (starLocation.X < 0 || starLocation.Y < 0 || starLocation.X >= Map.Width || starLocation.Y >= Map.Height)
+        {
+            return;
+        }
+
+        region[(int)starLocation.Y, (int)starLocation.X] = '*';
     }
 }
