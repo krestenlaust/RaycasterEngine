@@ -82,9 +82,15 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
 
             for (int y = 0; y < Height; y++)
             {
-                if (y < renderStart || y > renderEnd)
+                if (y < renderStart)
                 {
                     region[y, indexX] = ' ';
+                    continue;
+                }
+
+                if (y > renderEnd)
+                {
+                    region[y, indexX] = '.';
                     continue;
                 }
 
