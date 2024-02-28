@@ -27,6 +27,8 @@ public class Game : IWindow
         raycastWindow = new RaycastWindow(width, height, map);
         minimapWindow = new MinimapWindow(map);
 
+        raycastWindow.Camera.Position = new Vector2D(1, 1);
+
         renderedWindows.Add(((0, 0), raycastWindow));
         renderedWindows.Add(((0, 0), minimapWindow));
     }
