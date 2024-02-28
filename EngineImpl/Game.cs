@@ -69,6 +69,12 @@ public class Game : IWindow
             case ConsoleKey.E:
                 raycastWindow.Camera.Orientation += Orientation2D.FullRotation / 12;
                 break;
+            case ConsoleKey.Z:
+                raycastWindow.Z -= 0.1f;
+                break;
+            case ConsoleKey.X:
+                raycastWindow.Z += 0.1f;
+                break;
             default:
                 break;
         }

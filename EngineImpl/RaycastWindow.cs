@@ -39,6 +39,8 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
 
     public int Height { get; } = height;
 
+    public float Z { get; set; } = 0.5f;
+
     public void Render(Span2D<char> region)
     {
         Camera.CameraPattern.SampleSize = Width;
@@ -63,7 +65,11 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
 
             int maxWallRenderHeight = Height;
 
-            int wallRenderHeight = (int)((1 / ray.Value.Distance) * maxWallRenderHeight);
+            float upperHalf = (1 - Z) / ray.Value.Distance;
+            float lowerHalf = (Z) / ray.Value.Distance;
+
+            int renderStart = (Height / 2) - (int)(upperHalf * maxWallRenderHeight);
+            int renderEnd = (Height / 2) + (int)(lowerHalf * maxWallRenderHeight);
 
             // Get character to render
             if (!MapToRaycast.Render(ray.Value.Point, out char renderedUnit))
