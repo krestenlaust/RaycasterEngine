@@ -54,6 +54,9 @@ public readonly struct Vector2D(float x, float y)
     public static Vector2D operator +(Vector2D vector1, Vector2D vector2) =>
         new (vector1.X + vector2.X, vector1.Y + vector2.Y);
 
+    public static Vector2D operator -(Vector2D vector1, Vector2D vector2) =>
+        new (vector1.X - vector2.X, vector1.Y - vector2.Y);
+
     public static bool operator ==(Vector2D vector1, Vector2D vector2) =>
         vector1.X == vector2.X && vector1.Y == vector2.Y;
 
