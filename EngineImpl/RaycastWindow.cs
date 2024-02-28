@@ -77,9 +77,6 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
                 continue;
             }
 
-            int renderStart = Height / 2 - wallRenderHeight / 2;
-            int renderEnd = renderStart + wallRenderHeight;
-
             for (int y = 0; y < Height; y++)
             {
                 if (y < renderStart)
