@@ -37,6 +37,8 @@ public class Game : IWindow
 
     public int Height { get; set; }
 
+    public float MovementSpeed { get; set; } = 0.5f;
+
     public void Render(Span2D<char> region)
     {
         foreach (((int, int) pos, IWindow win) in renderedWindows)
@@ -54,34 +56,34 @@ public class Game : IWindow
         switch (Console.ReadKey().Key)
         {
             case ConsoleKey.W:
-                raycastWindow.Camera.Position += raycastWindow.Camera.Orientation.Vector;
+                raycastWindow.Camera.Position += raycastWindow.Camera.Orientation.Vector * MovementSpeed;
                 break;
             case ConsoleKey.S:
-                raycastWindow.Camera.Position -= raycastWindow.Camera.Orientation.Vector;
+                raycastWindow.Camera.Position -= raycastWindow.Camera.Orientation.Vector * MovementSpeed;
                 break;
             case ConsoleKey.A:
-                raycastWindow.Camera.Position += new Vector2D(raycastWindow.Camera.Orientation.Vector.Y, -raycastWindow.Camera.Orientation.Vector.X);
+                raycastWindow.Camera.Position += new Vector2D(raycastWindow.Camera.Orientation.Vector.Y, -raycastWindow.Camera.Orientation.Vector.X) * MovementSpeed;
                 break;
             case ConsoleKey.D:
-                raycastWindow.Camera.Position += new Vector2D(-raycastWindow.Camera.Orientation.Vector.Y, raycastWindow.Camera.Orientation.Vector.X);
+                raycastWindow.Camera.Position += new Vector2D(-raycastWindow.Camera.Orientation.Vector.Y, raycastWindow.Camera.Orientation.Vector.X) * MovementSpeed;
                 break;
             case ConsoleKey.UpArrow:
-                raycastWindow.Camera.Position += new Vector2D(0, -1);
+                raycastWindow.Camera.Position += new Vector2D(0, -1) * MovementSpeed;
                 break;
             case ConsoleKey.DownArrow:
-                raycastWindow.Camera.Position += new Vector2D(0, 1);
+                raycastWindow.Camera.Position += new Vector2D(0, 1) * MovementSpeed;
                 break;
             case ConsoleKey.LeftArrow:
-                raycastWindow.Camera.Position += new Vector2D(-1, 0);
+                raycastWindow.Camera.Position += new Vector2D(-1, 0) * MovementSpeed;
                 break;
             case ConsoleKey.RightArrow:
-                raycastWindow.Camera.Position += new Vector2D(1, 0);
+                raycastWindow.Camera.Position += new Vector2D(1, 0) * MovementSpeed;
                 break;
             case ConsoleKey.Q:
-                raycastWindow.Camera.Orientation -= Orientation2D.FullRotation / 12;
+                raycastWindow.Camera.Orientation -= Orientation2D.FullRotation / 16;
                 break;
             case ConsoleKey.E:
-                raycastWindow.Camera.Orientation += Orientation2D.FullRotation / 12;
+                raycastWindow.Camera.Orientation += Orientation2D.FullRotation / 16;
                 break;
             case ConsoleKey.Z:
                 raycastWindow.Z -= 0.1f;
