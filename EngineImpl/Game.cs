@@ -8,11 +8,11 @@ public class Game : IWindow
 {
     static readonly CartesianPlane<char> map = new CartesianPlane<char>(new char?[,]
     {
-            { 'P', 'A',     'B',      'C', 'D' },
-            { 'O', null, null, null,    'E' },
-            { 'N', null, null, null,    'F' },
-            { 'M', null, null, null,    'G' },
-            { 'L', 'K',     'J',      'I', 'H' },
+            { 'P', 'A',     'B',      'C', 'D', 'K', 'R', 'R', 'R' },
+            { 'O', null, null, null, null, '#', null, null,    'E' },
+            { 'N', null, null, 'M', null, null, null, null,   'F' },
+            { 'M', null, null, null, null, '#', null, null,   'G' },
+            { 'L', 'K',     'J',      'I', 'D', 'E', 'S', 'S', 'S' },
     });
 
     readonly List<((int row, int column), IWindow)> renderedWindows = new();
