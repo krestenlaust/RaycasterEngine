@@ -52,15 +52,27 @@ public class Game : IWindow
         switch (Console.ReadKey().Key)
         {
             case ConsoleKey.W:
-                raycastWindow.Camera.Position += new Vector2D(0, -1);
+                raycastWindow.Camera.Position += raycastWindow.Camera.Orientation.Vector;
                 break;
             case ConsoleKey.S:
-                raycastWindow.Camera.Position += new Vector2D(0, 1);
+                raycastWindow.Camera.Position -= raycastWindow.Camera.Orientation.Vector;
                 break;
             case ConsoleKey.A:
-                raycastWindow.Camera.Position += new Vector2D(-1, 0);
+                raycastWindow.Camera.Position += new Vector2D(raycastWindow.Camera.Orientation.Vector.Y, -raycastWindow.Camera.Orientation.Vector.X);
                 break;
             case ConsoleKey.D:
+                raycastWindow.Camera.Position += new Vector2D(-raycastWindow.Camera.Orientation.Vector.Y, raycastWindow.Camera.Orientation.Vector.X);
+                break;
+            case ConsoleKey.UpArrow:
+                raycastWindow.Camera.Position += new Vector2D(0, -1);
+                break;
+            case ConsoleKey.DownArrow:
+                raycastWindow.Camera.Position += new Vector2D(0, 1);
+                break;
+            case ConsoleKey.LeftArrow:
+                raycastWindow.Camera.Position += new Vector2D(-1, 0);
+                break;
+            case ConsoleKey.RightArrow:
                 raycastWindow.Camera.Position += new Vector2D(1, 0);
                 break;
             case ConsoleKey.Q:
