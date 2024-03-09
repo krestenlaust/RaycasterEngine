@@ -4,7 +4,7 @@ using Engine.SpaceRepresentation;
 
 namespace EngineImpl;
 
-public class MinimapWindow(CartesianPlane<char> map) : IWindow
+public class MinimapWindow(CartesianPlane<char> map) : IWindow<char>
 {
     public CartesianPlane<char> Map { get; set; } = map;
     public Vector2D PlayerLocation { get; set; }

@@ -1,13 +1,12 @@
 ﻿using CommunityToolkit.HighPerformance;
 
-namespace EngineImpl
+namespace EngineImpl;
+
+public interface IWindow<TRenderingUnit>
 {
-    internal interface IWindow
-    {
-        int Width { get; }
+    int Width { get; }
 
-        int Height { get; }
+    int Height { get; }
 
-        void Render(Span2D<char> region);
-    }
+    void Render(Span2D<TRenderingUnit> region);
 }

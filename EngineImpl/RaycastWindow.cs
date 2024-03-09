@@ -6,7 +6,7 @@ using Engine.MathTypes;
 
 namespace EngineImpl;
 
-public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> mapToRaycast) : IWindow
+public class RaycastWindow<TRenderingUnit>(int width, int height, IRenderSpace<Vector2D, TRenderingUnit> mapToRaycast) : IWindow<TRenderingUnit>
 {
     public readonly Camera<DiscreteRaycast,
        PerspectiveLineCameraPattern<
@@ -16,7 +16,7 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
        Vector2D,
        Orientation2D,
        float,
-       char> Camera =
+       TRenderingUnit> Camera =
             new Camera<
                 DiscreteRaycast,
                 PerspectiveLineCameraPattern<
@@ -26,14 +26,18 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
                 Vector2D,
                 Orientation2D,
                 float,
-                char>
+                TRenderingUnit>
                 (new PerspectiveLineCameraPattern<
                     DiscreteRaycast,
                     Vector2D,
                     float>
                     (Orientation2D.FromDegrees(90), 10), new DiscreteRaycast(0.1f), 15);
 
-    public IRenderSpace<Vector2D, char> MapToRaycast { get; set; } = mapToRaycast;
+    public IRenderSpace<Vector2D, TRenderingUnit> MapToRaycast { get; set; } = mapToRaycast;
+
+    public TRenderingUnit CeilingUnit { get; set; }
+    public TRenderingUnit FloorUnit { get; set; }
+    public TRenderingUnit NothingUnit { get; set; }
 
     public int Width { get; } = width;
 
@@ -41,7 +45,7 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
 
     public float Z { get; set; } = 0.5f;
 
-    public void Render(Span2D<char> region)
+    public void Render(Span2D<TRenderingUnit> region)
     {
         Camera.CameraPattern.SampleSize = Width;
 
@@ -59,7 +63,7 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
 
             if (ray is null)
             {
-                region[indexY, indexX] = '_';
+                region[indexY, indexX] = NothingUnit;
                 continue;
             }
 
@@ -72,7 +76,7 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
             int renderEnd = (Height / 2) + (int)(lowerHalf * maxWallRenderHeight);
 
             // Get character to render
-            if (!MapToRaycast.Render(ray.Value.Point, out char renderedUnit))
+            if (!MapToRaycast.Render(ray.Value.Point, out TRenderingUnit renderedUnit))
             {
                 continue;
             }
@@ -81,13 +85,13 @@ public class RaycastWindow(int width, int height, IRenderSpace<Vector2D, char> m
             {
                 if (y < renderStart)
                 {
-                    region[y, indexX] = ' ';
+                    region[y, indexX] = CeilingUnit;
                     continue;
                 }
 
                 if (y > renderEnd)
                 {
-                    region[y, indexX] = '.';
+                    region[y, indexX] = FloorUnit;
                     continue;
                 }
 

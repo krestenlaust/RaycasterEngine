@@ -1,7 +1,7 @@
 ﻿using CommunityToolkit.HighPerformance;
 using System.Diagnostics;
 
-namespace EngineImpl;
+namespace EngineImpl.Terminal;
 
 internal class Program
 {

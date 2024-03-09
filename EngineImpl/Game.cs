@@ -4,7 +4,7 @@ using Engine.SpaceRepresentation;
 
 namespace EngineImpl;
 
-public class Game : IWindow
+public class Game : IWindow<char>
 {
     static readonly CartesianPlane<char> map = new CartesianPlane<char>(new char?[,]
     {
@@ -15,22 +15,27 @@ public class Game : IWindow
             { 'L', 'K',     'J',      'I', 'D', 'E', 'S', 'S', 'S' },
     });
 
-    readonly List<((int row, int column), IWindow)> renderedWindows = new();
-    readonly RaycastWindow raycastWindow;
+    readonly RaycastWindow<char> raycastWindow;
     readonly MinimapWindow minimapWindow;
+    readonly CompositWindow<char> compositWindow;
 
     public Game(int width, int height)
     {
         this.Width = width;
         this.Height = height;
 
-        raycastWindow = new RaycastWindow(width, height, map);
+        raycastWindow = new RaycastWindow<char>(width, height, map);
+        raycastWindow.NothingUnit = '_';
+        raycastWindow.CeilingUnit = ' ';
+        raycastWindow.FloorUnit = '.';
+
         minimapWindow = new MinimapWindow(map);
 
         raycastWindow.Camera.Position = new Vector2D(1, 1);
 
-        renderedWindows.Add(((0, 0), raycastWindow));
-        renderedWindows.Add(((0, 0), minimapWindow));
+        compositWindow = new CompositWindow<char>();
+        compositWindow.RenderedWindows.Add(((0, 0), raycastWindow));
+        compositWindow.RenderedWindows.Add(((0, 0), minimapWindow));
     }
 
     public int Width { get; set; }
@@ -41,12 +46,7 @@ public class Game : IWindow
 
     public void Render(Span2D<char> region)
     {
-        foreach (((int, int) pos, IWindow win) in renderedWindows)
-        {
-            var windowRegion = region.Slice(pos.Item1, pos.Item2, win.Height, win.Width);
-
-            win.Render(windowRegion);
-        }
+        compositWindow.Render(region);
 
         if (!Console.KeyAvailable)
         {
