@@ -9,11 +9,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineImpl", "EngineImpl\En
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engine.Tests", "Engine.Tests\Engine.Tests.csproj", "{F373A983-C990-45F0-9D62-9EF774EE7D33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineImplForms", "EngineImplForms\EngineImplForms.csproj", "{2DF2BE7E-2715-4772-A56A-F226CD0D5CA0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineImplForms", "EngineImplForms\EngineImplForms.csproj", "{2DF2BE7E-2715-4772-A56A-F226CD0D5CA0}"
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9061EA6A-1661-4137-BD6B-17179BB407BC}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineImpl.Terminal", "EngineImpl.Terminal\EngineImpl.Terminal.csproj", "{EC34AA5E-AE9D-4C5C-B661-2861F982965F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +40,10 @@ Global
 		{2DF2BE7E-2715-4772-A56A-F226CD0D5CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DF2BE7E-2715-4772-A56A-F226CD0D5CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DF2BE7E-2715-4772-A56A-F226CD0D5CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC34AA5E-AE9D-4C5C-B661-2861F982965F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC34AA5E-AE9D-4C5C-B661-2861F982965F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC34AA5E-AE9D-4C5C-B661-2861F982965F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC34AA5E-AE9D-4C5C-B661-2861F982965F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
