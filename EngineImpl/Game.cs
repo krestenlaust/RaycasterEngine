@@ -25,6 +25,10 @@ public class Game : IWindow<char>
         this.Height = height;
 
         raycastWindow = new RaycastWindow<char>(width, height, map);
+        raycastWindow.NothingUnit = '_';
+        raycastWindow.CeilingUnit = ' ';
+        raycastWindow.FloorUnit = '.';
+
         minimapWindow = new MinimapWindow(map);
 
         raycastWindow.Camera.Position = new Vector2D(1, 1);
