@@ -31,7 +31,7 @@ public class RaycastWindow<TRenderingUnit>(int width, int height, IRenderSpace<V
                     DiscreteRaycast,
                     Vector2D,
                     float>
-                    (Orientation2D.FromDegrees(90), 10), new DiscreteRaycast(0.2f), 10);
+                    (Orientation2D.FromDegrees(90), 10), new DiscreteRaycast(0.1f), 15);
 
     public IRenderSpace<Vector2D, TRenderingUnit> MapToRaycast { get; set; } = mapToRaycast;
 
