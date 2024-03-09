@@ -1,4 +1,4 @@
-﻿namespace EngineImplForms
+﻿namespace EngineImpl.Forms
 {
     partial class FormCanvas
     {
