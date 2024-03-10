@@ -2,7 +2,7 @@
 using Engine.MathTypes;
 using Engine.SpaceRepresentation;
 
-namespace EngineImpl;
+namespace EngineImpl.Terminal;
 
 public class Game : IWindow<char>
 {
