@@ -1,5 +1,11 @@
 ﻿namespace Engine.MathTypes;
 
+/// <summary>
+/// A spacial type that represents standard 3D cartesian coordinates.
+/// </summary>
+/// <param name="x"></param>
+/// <param name="y"></param>
+/// <param name="z"></param>
 public readonly struct Vector3D(float x, float y, float z)
 {
     static readonly int GridTolerance = 3;
