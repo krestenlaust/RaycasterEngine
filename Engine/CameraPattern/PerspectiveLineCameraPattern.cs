@@ -10,13 +10,13 @@ namespace Engine.CameraPattern;
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
 /// <param name="fieldOfView">The field of view, of the camera pattern.</param>
 /// <param name="sampleSize">The amount of samples to take within the field of view.</param>
-public class PerspectiveLineCameraPattern<TCastMethod, TPosition, TLength>(Orientation fieldOfView, int sampleSize) : ICameraPattern<TCastMethod, TPosition, Orientation, TLength>
-    where TCastMethod : ICastMethod<TPosition, Orientation, TLength>
+public class PerspectiveLineCameraPattern<TCastMethod, TPosition, TLength>(Angle fieldOfView, int sampleSize) : ICameraPattern<TCastMethod, TPosition, Angle, TLength>
+    where TCastMethod : ICastMethod<TPosition, Angle, TLength>
 {
     /// <summary>
     /// Gets or sets the field of view, of the camera pattern.
     /// </summary>
-    public Orientation FieldOfView { get; set; } = fieldOfView;
+    public Angle FieldOfView { get; set; } = fieldOfView;
 
     /// <summary>
     /// Gets or sets the amount of samples to take within the field of view.
@@ -24,14 +24,14 @@ public class PerspectiveLineCameraPattern<TCastMethod, TPosition, TLength>(Orien
     public int SampleSize { get; set; } = sampleSize;
 
     /// <inheritdoc/>
-    public IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, Orientation orientation, TLength renderDistance)
+    public IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, Angle orientation, TLength renderDistance)
     {
         float startRadians = orientation.Radians - (FieldOfView.Radians / 2);
         float stepSizeRadians = FieldOfView.Radians / SampleSize;
 
         for (int i = 0; i < SampleSize; i++)
         {
-            var currentDirection = new Orientation(startRadians + (stepSizeRadians * i));
+            var currentDirection = new Angle(startRadians + (stepSizeRadians * i));
 
             if (caster.Cast(space, origin, currentDirection, renderDistance, out Hit<TPosition, TLength>? hit))
             {
