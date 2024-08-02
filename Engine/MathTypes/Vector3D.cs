@@ -2,6 +2,8 @@
 
 public readonly struct Vector3D(float x, float y, float z)
 {
+    static readonly int GridTolerance = 3;
+
     /// <summary>
     /// Gets the ??? component of the vector-type.
     /// </summary>
@@ -66,4 +68,22 @@ public readonly struct Vector3D(float x, float y, float z)
         vector1.X != vector2.X ||
         vector1.Y != vector2.Y ||
         vector1.Z != vector2.Z;
+
+    /// <summary>
+    /// Accounts for floating-point errors, and floors the position to a cartesian cube.
+    /// </summary>
+    /// <param name="roundingToleranceDigits">The amount of digits of significance to round according to.</param>
+    /// <returns>Returns the integer 3D-vector coordinates.</returns>
+    public Vector3D GetCartesianCube(int roundingToleranceDigits) =>
+        new(
+            MathF.Floor(MathF.Round(X, roundingToleranceDigits)),
+            MathF.Floor(MathF.Round(Y, roundingToleranceDigits)),
+            MathF.Floor(MathF.Round(Z, roundingToleranceDigits))
+            );
+
+    /// <summary>
+    /// Accounts for floating-point errors rounding down to 3 significant digits, and floors the position to a cartesian whole cube.
+    /// </summary>
+    /// <returns>Returns the integer 3D-vector coordinates.</returns>
+    public Vector3D GetCartesianCube() => GetCartesianCube(GridTolerance);
 }
