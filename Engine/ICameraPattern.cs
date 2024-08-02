@@ -7,7 +7,7 @@
 /// </summary>
 /// <typeparam name="TCastMethod">The casting method to utilize, e.g. <see cref="CastMethod.DiscreteRaycast"/> for standard euclidean iterative line casting.</typeparam>
 /// <typeparam name="TPosition">The spacial type to utilize, e.g. <see cref="MathTypes.Vector2D"/> for standard cartesian coordinate.</typeparam>
-/// <typeparam name="TAngle">The angular type to utilize, e.g. <see cref="MathTypes.Orientation2D"/> for basic euclidean orientational properties.</typeparam>
+/// <typeparam name="TAngle">The angular type to utilize, e.g. <see cref="MathTypes.Orientation"/> for basic euclidean orientational properties.</typeparam>
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
 public interface ICameraPattern<TCastMethod, TPosition, in TAngle, TLength>
     where TCastMethod : ICastMethod<TPosition, TAngle, TLength>

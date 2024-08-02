@@ -7,10 +7,10 @@ namespace Engine.CastMethod;
 /// Reference: https://www.geeksforgeeks.org/dda-line-generation-algorithm-computer-graphics/.
 /// </summary>
 /// <typeparam name="TRenderingUnit"></typeparam>
-public class DDARaycast : ICastMethod<Vector2D, Orientation2D, float>
+public class DDARaycast : ICastMethod<Vector2D, Orientation, float>
 {
     /// <inheritdoc/>
-    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
+    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
         // Calculate offset to nearby grid.
         // Extrapolate position by grid unit, till something is hit.
@@ -20,7 +20,7 @@ public class DDARaycast : ICastMethod<Vector2D, Orientation2D, float>
     /// <summary>
     /// Finds the first hit along horizontal grid lines.
     /// </summary>
-    Vector2D? CastHorizontal(Vector2D origin, Orientation2D direction, float maxDistance)
+    Vector2D? CastHorizontal(Vector2D origin, Orientation direction, float maxDistance)
     {
         throw new NotImplementedException();
     }
