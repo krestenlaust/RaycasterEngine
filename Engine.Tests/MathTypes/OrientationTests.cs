@@ -16,7 +16,7 @@ namespace Engine.Tests.MathTypes
         public void TestRadiansToDegrees(float radians, float expectedDegrees)
         {
             // Arrange & Act
-            float actualDegrees = new Orientation(radians).Degrees;
+            float actualDegrees = new Angle(radians).Degrees;
 
             // Assert
             Assert.AreEqual(expectedDegrees, actualDegrees, 0.001f);
@@ -29,7 +29,7 @@ namespace Engine.Tests.MathTypes
         public void TestNormalize(float degrees, float expectedDegrees)
         {
             // Arrange & Act
-            float actualDegrees = Orientation.FromDegrees(degrees).Normalized.Degrees;
+            float actualDegrees = Angle.FromDegrees(degrees).Normalized.Degrees;
 
             // Assert
             Assert.AreEqual(expectedDegrees, actualDegrees, 0.001f);
@@ -47,7 +47,7 @@ namespace Engine.Tests.MathTypes
         public void TestDegreesToRadians(float degree, float expectedRadians)
         {
             // Arrange & Act
-            float actualRadians = Orientation.FromDegrees(degree).Radians;
+            float actualRadians = Angle.FromDegrees(degree).Radians;
 
             // Assert
             Assert.AreEqual(expectedRadians, actualRadians, 0.001f);
@@ -61,7 +61,7 @@ namespace Engine.Tests.MathTypes
         [DataTestMethod]
         public void TestUpperhalfProperty(float degree, bool expectedUpperHalf)
         {
-            bool actualUpperHalf = Orientation.FromDegrees(degree).Upperhalf;
+            bool actualUpperHalf = Angle.FromDegrees(degree).Upperhalf;
 
             Assert.AreEqual(expectedUpperHalf, actualUpperHalf);
         }
@@ -74,7 +74,7 @@ namespace Engine.Tests.MathTypes
         [DataTestMethod]
         public void TestLefthalfProperty(float degree, bool expectedLeftHalf)
         {
-            bool actualLefthalf = Orientation.FromDegrees(degree).Lefthalf;
+            bool actualLefthalf = Angle.FromDegrees(degree).Lefthalf;
 
             Assert.AreEqual(expectedLeftHalf, actualLefthalf);
         }
@@ -86,7 +86,7 @@ namespace Engine.Tests.MathTypes
         [DataTestMethod]
         public void TestOrientationToVector(float orientationRad, float unitX, float unitY)
         {
-            Orientation orientation = new(orientationRad);
+            Angle orientation = new(orientationRad);
 
             Vector2D unitVector = orientation.Vector;
 

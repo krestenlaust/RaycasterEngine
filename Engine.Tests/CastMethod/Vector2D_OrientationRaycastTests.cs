@@ -5,11 +5,11 @@ namespace Engine.Tests.CastMethod;
 /// <summary>
 /// Tests for testing implementations of ICastMethod,
 /// which use <see cref="Vector2D"/> for TPosition.
-/// (And use <see cref="Orientation"/> for TAngle)
+/// (And use <see cref="Angle"/> for TAngle)
 /// </summary>
-public abstract class Vector2D_OrientationRaycastTests(ICastMethod<Vector2D, Orientation, float> cast)
+public abstract class Vector2D_OrientationRaycastTests(ICastMethod<Vector2D, Angle, float> cast)
 {
-    readonly ICastMethod<Vector2D, Orientation, float> cast = cast;
+    readonly ICastMethod<Vector2D, Angle, float> cast = cast;
 
     [DataRow(0, 0, 0, 0)]
     [DataRow(1, 2, 1, 4)]
@@ -21,7 +21,7 @@ public abstract class Vector2D_OrientationRaycastTests(ICastMethod<Vector2D, Ori
         Vector2D expectedPoint = new(xPoint, yPoint);
         Vector2D origin = new(xOrigin, yOrigin);
 
-        bool castHit = cast.Cast(TestSpaces.Space5x5Bordered, origin, Orientation.UpRotation, 5, out Hit<Vector2D, float>? hit);
+        bool castHit = cast.Cast(TestSpaces.Space5x5Bordered, origin, Angle.UpRotation, 5, out Hit<Vector2D, float>? hit);
 
         Assert.IsTrue(castHit);
         Assert.IsNotNull(hit);
