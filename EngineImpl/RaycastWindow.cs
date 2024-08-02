@@ -14,7 +14,7 @@ public class RaycastWindow<TRenderingUnit>(int width, int height, IRenderSpace<V
            Vector2D,
            float>,
        Vector2D,
-       Orientation2D,
+       Orientation,
        float,
        TRenderingUnit> Camera =
             new Camera<
@@ -24,14 +24,14 @@ public class RaycastWindow<TRenderingUnit>(int width, int height, IRenderSpace<V
                     Vector2D,
                     float>,
                 Vector2D,
-                Orientation2D,
+                Orientation,
                 float,
                 TRenderingUnit>
                 (new PerspectiveLineCameraPattern<
                     DiscreteRaycast,
                     Vector2D,
                     float>
-                    (Orientation2D.FromDegrees(90), 10), new DiscreteRaycast(0.1f), 15);
+                    (Orientation.FromDegrees(90), 10), new DiscreteRaycast(0.1f), 15);
 
     public IRenderSpace<Vector2D, TRenderingUnit> MapToRaycast { get; set; } = mapToRaycast;
 

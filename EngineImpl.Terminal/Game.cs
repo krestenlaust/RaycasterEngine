@@ -80,10 +80,10 @@ public class Game : IWindow<char>
                 raycastWindow.Camera.Position += new Vector2D(1, 0) * MovementSpeed;
                 break;
             case ConsoleKey.Q:
-                raycastWindow.Camera.Orientation -= Orientation2D.FullRotation / 16;
+                raycastWindow.Camera.Orientation -= Orientation.FullRotation / 16;
                 break;
             case ConsoleKey.E:
-                raycastWindow.Camera.Orientation += Orientation2D.FullRotation / 16;
+                raycastWindow.Camera.Orientation += Orientation.FullRotation / 16;
                 break;
             case ConsoleKey.Z:
                 raycastWindow.Z -= 0.1f;

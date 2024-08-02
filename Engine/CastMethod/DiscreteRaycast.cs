@@ -6,12 +6,12 @@ namespace Engine.CastMethod;
 /// Euclidian casting method, which simply takes a smal stepsize to look for hits.
 /// </summary>
 /// <param name="stepSize"></param>
-public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation2D, float>
+public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation, float>
 {
     public float StepSize { get; set; } = stepSize;
 
     /// <inheritdoc/>
-    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, out Hit<Vector2D, float>? hit)
+    public bool Cast(IHitSpace<Vector2D> space, Vector2D origin, Orientation direction, float maxDistance, out Hit<Vector2D, float>? hit)
     {
         if (CastIncremental(space, origin, direction, maxDistance, StepSize, out Vector2D hitPoint, out float distance))
         {
@@ -25,7 +25,7 @@ public class DiscreteRaycast(float stepSize) : ICastMethod<Vector2D, Orientation
         }
     }
 
-    static bool CastIncremental(IHitSpace<Vector2D> space, Vector2D origin, Orientation2D direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
+    static bool CastIncremental(IHitSpace<Vector2D> space, Vector2D origin, Orientation direction, float maxDistance, float stepSize, out Vector2D hitPoint, out float distance)
     {
         hitPoint = default;
         distance = default;
