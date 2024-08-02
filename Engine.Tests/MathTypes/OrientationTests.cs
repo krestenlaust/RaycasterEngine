@@ -3,7 +3,7 @@ using Engine.MathTypes;
 namespace Engine.Tests.MathTypes
 {
     [TestClass]
-    public class Orientation2DTests
+    public class OrientationTests
     {
         [DataRow(0, 0)]
         [DataRow((float)Math.PI / 2, 90)]
@@ -84,7 +84,7 @@ namespace Engine.Tests.MathTypes
         [DataRow(MathF.PI, -1, 0)] // Orientation2D.Left
         [DataRow(0, 1, 0)] // Orientation2D.Right
         [DataTestMethod]
-        public void TestOrientation2DToVector(float orientationRad, float unitX, float unitY)
+        public void TestOrientationToVector(float orientationRad, float unitX, float unitY)
         {
             Orientation orientation = new(orientationRad);
 
