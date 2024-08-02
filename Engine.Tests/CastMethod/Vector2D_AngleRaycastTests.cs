@@ -7,7 +7,7 @@ namespace Engine.Tests.CastMethod;
 /// which use <see cref="Vector2D"/> for TPosition.
 /// (And use <see cref="Angle"/> for TOrientation)
 /// </summary>
-public abstract class Vector2D_OrientationRaycastTests(ICastMethod<Vector2D, Angle, float> cast)
+public abstract class Vector2D_AngleRaycastTests(ICastMethod<Vector2D, Angle, float> cast)
 {
     readonly ICastMethod<Vector2D, Angle, float> cast = cast;
 

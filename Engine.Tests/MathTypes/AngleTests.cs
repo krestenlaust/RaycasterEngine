@@ -3,7 +3,7 @@ using Engine.MathTypes;
 namespace Engine.Tests.MathTypes
 {
     [TestClass]
-    public class OrientationTests
+    public class AngleTests
     {
         [DataRow(0, 0)]
         [DataRow((float)Math.PI / 2, 90)]
@@ -79,16 +79,16 @@ namespace Engine.Tests.MathTypes
             Assert.AreEqual(expectedLeftHalf, actualLefthalf);
         }
 
-        [DataRow(MathF.PI / 2, 0, 1)] // Orientation2D.Up
-        [DataRow(MathF.PI * 2 - MathF.PI / 2, 0, -1)] // Orientation2D.Down
-        [DataRow(MathF.PI, -1, 0)] // Orientation2D.Left
-        [DataRow(0, 1, 0)] // Orientation2D.Right
+        [DataRow(MathF.PI / 2, 0, 1)] // Angle.Up
+        [DataRow(MathF.PI * 2 - MathF.PI / 2, 0, -1)] // Angle.Down
+        [DataRow(MathF.PI, -1, 0)] // Angle.Left
+        [DataRow(0, 1, 0)] // Angle.Right
         [DataTestMethod]
-        public void TestOrientationToVector(float orientationRad, float unitX, float unitY)
+        public void TestAngleToVector(float angleRad, float unitX, float unitY)
         {
-            Angle orientation = new(orientationRad);
+            Angle angle = new(angleRad);
 
-            Vector2D unitVector = orientation.Vector;
+            Vector2D unitVector = angle.Vector;
 
             Assert.AreEqual(unitX, unitVector.X, 0.00001f);
             Assert.AreEqual(unitY, unitVector.Y, 0.00001f);
