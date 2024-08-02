@@ -7,10 +7,10 @@
 /// </summary>
 /// <typeparam name="TCastMethod">The casting method to utilize, e.g. <see cref="CastMethod.DiscreteRaycast"/> for standard euclidean iterative line casting.</typeparam>
 /// <typeparam name="TPosition">The spacial type to utilize, e.g. <see cref="MathTypes.Vector2D"/> for standard cartesian coordinate.</typeparam>
-/// <typeparam name="TAngle">The angular type to utilize, e.g. <see cref="MathTypes.Angle"/> for basic euclidean orientational properties.</typeparam>
+/// <typeparam name="TOrientation">The angular type to utilize, e.g. <see cref="MathTypes.Angle"/> for basic euclidean orientational properties.</typeparam>
 /// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
-public interface ICameraPattern<TCastMethod, TPosition, in TAngle, TLength>
-    where TCastMethod : ICastMethod<TPosition, TAngle, TLength>
+public interface ICameraPattern<TCastMethod, TPosition, in TOrientation, TLength>
+    where TCastMethod : ICastMethod<TPosition, TOrientation, TLength>
 {
     /// <summary>
     /// Renders the scene using the provided cast method.
@@ -21,5 +21,5 @@ public interface ICameraPattern<TCastMethod, TPosition, in TAngle, TLength>
     /// <param name="orientation">The absolute orientation of the perspective.</param>
     /// <param name="renderDistance">The constraint of distance of the render.</param>
     /// <returns>Every cast ray, each None if hits nothing, Some if hits. Some provides information about hit.</returns>
-    IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, TAngle orientation, TLength renderDistance);
+    IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, TOrientation orientation, TLength renderDistance);
 }
