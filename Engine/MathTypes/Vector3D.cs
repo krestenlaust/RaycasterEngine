@@ -6,7 +6,7 @@
 /// <param name="x"></param>
 /// <param name="y"></param>
 /// <param name="z"></param>
-public readonly struct Vector3D(float x, float y, float z)
+public readonly struct Vector3D(float x, float y, float z) : IVector<Vector3D>
 {
     static readonly int GridTolerance = 3;
 
