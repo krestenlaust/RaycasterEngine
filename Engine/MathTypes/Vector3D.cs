@@ -3,6 +3,7 @@
 namespace Engine.MathTypes;
 
 /// <summary>
+/// TODO: Decide conventions for 3D axis.
 /// A spacial type that represents standard 3D cartesian coordinates.
 /// </summary>
 /// <param name="x"></param>
