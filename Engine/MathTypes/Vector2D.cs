@@ -7,7 +7,7 @@ namespace Engine.MathTypes;
 /// </summary>
 /// <param name="x">The horizontal component of the vector-type.</param>
 /// <param name="y">The vertical component of the vector-type.</param>
-public readonly struct Vector2D(float x, float y)
+public readonly struct Vector2D(float x, float y) : IVector<Vector2D>
 {
     static readonly int GridTolerance = 3;
 
