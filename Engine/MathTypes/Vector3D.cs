@@ -1,4 +1,6 @@
-﻿namespace Engine.MathTypes;
+﻿using System.Globalization;
+
+namespace Engine.MathTypes;
 
 /// <summary>
 /// A spacial type that represents standard 3D cartesian coordinates.
@@ -74,6 +76,13 @@ public readonly struct Vector3D(float x, float y, float z) : IVector<Vector3D>
         vector1.X != vector2.X ||
         vector1.Y != vector2.Y ||
         vector1.Z != vector2.Z;
+
+    /// <inheritdoc/>
+    public override string ToString()
+    {
+        CultureInfo info = CultureInfo.InvariantCulture;
+        return $"({X.ToString(info)}, {Y.ToString(info)}, {Z.ToString(info)})";
+    }
 
     /// <summary>
     /// Accounts for floating-point errors, and floors the position to a cartesian cube.
