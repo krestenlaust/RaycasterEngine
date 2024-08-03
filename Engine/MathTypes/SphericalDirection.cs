@@ -25,4 +25,11 @@ public readonly struct SphericalDirection(Angle azimuthal, Angle polar)
         MathF.Sin(Azimuth.Radians) * MathF.Cos(Inclination.Radians),
         MathF.Cos(Azimuth.Radians) * MathF.Cos(Inclination.Radians),
         MathF.Sin(Inclination.Radians));
+
+    /// <summary>
+    /// Converts a vector (unit or otherwise) into the spherical direction representation.
+    /// </summary>
+    /// <param name="vector"></param>
+    /// <returns></returns>
+    public static SphericalDirection FromVector(Vector3D vector) => throw new NotImplementedException();
 }
