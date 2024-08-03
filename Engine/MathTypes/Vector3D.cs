@@ -9,7 +9,7 @@ namespace Engine.MathTypes;
 /// <param name="x"></param>
 /// <param name="y"></param>
 /// <param name="z"></param>
-public readonly struct Vector3D(float x, float y, float z) : IVector<Vector3D>
+public readonly struct Vector3D(float x, float y, float z) : IEquatable<Vector3D>, IVector<Vector3D>
 {
     static readonly int GridTolerance = 3;
 
@@ -102,4 +102,13 @@ public readonly struct Vector3D(float x, float y, float z) : IVector<Vector3D>
     /// </summary>
     /// <returns>Returns the integer 3D-vector coordinates.</returns>
     public Vector3D GetCartesianCube() => GetCartesianCube(GridTolerance);
+
+    /// <inheritdoc/>
+    public bool Equals(Vector3D other) => this == other;
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj) => obj is Vector3D vector && Equals(vector);
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => HashCode.Combine(X, Y, Z);
 }

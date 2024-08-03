@@ -7,7 +7,7 @@ namespace Engine.MathTypes;
 /// </summary>
 /// <param name="x">The horizontal component of the vector-type.</param>
 /// <param name="y">The vertical component of the vector-type.</param>
-public readonly struct Vector2D(float x, float y) : IVector<Vector2D>
+public readonly struct Vector2D(float x, float y) : IEquatable<Vector2D>, IVector<Vector2D>
 {
     static readonly int GridTolerance = 3;
 
@@ -86,4 +86,13 @@ public readonly struct Vector2D(float x, float y) : IVector<Vector2D>
     /// </summary>
     /// <returns>Returns the integer Vector2D coordinates.</returns>
     public Vector2D GetCartesianCell() => GetCartesianCell(GridTolerance);
+
+    /// <inheritdoc/>
+    public bool Equals(Vector2D other) => this == other;
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj) => obj is Vector2D vector && Equals(vector);
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => HashCode.Combine(X, Y);
 }
