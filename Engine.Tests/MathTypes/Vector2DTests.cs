@@ -5,72 +5,74 @@ namespace Engine.Tests.MathTypes;
 [TestClass]
 public class Vector2DTests
 {
-    [DataRow(1, 1, 1, 1)]
-    [DataRow(0.9f, 0.9f, 0, 0)]
-    [DataRow(-0.9f, -0.9f, -1, -1)]
+    public static Vector2D ComponentsToVector2D(float[] components) => new(components[0], components[1]);
+
+    [DataRow(new float[] { 1, 1 }, new float[] { 1, 1 })]
+    [DataRow(new float[] { 0.9f, 0.9f }, new float[] { 0, 0 })]
+    [DataRow(new float[] { -0.9f, -0.9f }, new float[] { -1, -1 })]
     [DataTestMethod]
-    public void TestFloorMethod(float x, float y, float expectedX, float expectedY)
+    public void TestFloorMethod(float[] components, float[] expectedComponents)
     {
-        Vector2D expected = new(expectedX, expectedY);
-        Vector2D a = new(x, y);
+        Vector2D expected = ComponentsToVector2D(expectedComponents);
+        Vector2D a = ComponentsToVector2D(components);
 
         Vector2D aFloor = a.Floor;
 
         Assert.AreEqual(expected, aFloor);
     }
 
-    [DataRow(10, 10, 5, 5)]
-    [DataRow(-1, -1, -5, -5)]
-    [DataRow(5, -5, -5, 5)]
+    [DataRow(new float[] { 10, 10 }, new float[] { 5, 5 })]
+    [DataRow(new float[] { -1, -1 }, new float[] { -5, -5 })]
+    [DataRow(new float[] { 5, -5 }, new float[] { -5, 5 })]
     [DataTestMethod]
-    public void TestPlusArithmetic(float xA, float yA, float xB, float yB)
+    public void TestPlusArithmetic(float[] componentsA, float[] componentsB)
     {
-        Vector2D a = new(xA, yA);
-        Vector2D b = new(xB, yB);
+        Vector2D a = ComponentsToVector2D(componentsA);
+        Vector2D b = ComponentsToVector2D(componentsB);
 
         Vector2D plus = a + b;
 
-        Assert.AreEqual(xA + xB, plus.X);
-        Assert.AreEqual(yA + yB, plus.Y);
+        Assert.AreEqual(componentsA[0] + componentsB[0], plus.X);
+        Assert.AreEqual(componentsA[1] + componentsB[1], plus.Y);
     }
 
-    [DataRow(3, 4, 0.6f, 0.8f)]
+    [DataRow(new float[] { 3, 4 }, new float[] { 0.6f, 0.8f })]
     //[DataRow(0, 0, 0)] TODO: Decide what to do on zero vector normalization.
-    [DataRow(-3, -4, -0.6f, -0.8f)]
+    [DataRow(new float[] { -3, -4 }, new float[] { -0.6f, -0.8f })]
     [DataTestMethod]
-    public void TestNormalization(float x, float y, float normX, float normY)
+    public void TestNormalization(float[] components, float[] expectedComponents)
     {
-        Vector2D expectedNorm = new(normX, normY);
-        Vector2D vec = new(x, y);
+        Vector2D expectedNorm = ComponentsToVector2D(expectedComponents);
+        Vector2D vec = ComponentsToVector2D(components);
 
         Vector2D norm = vec.Normalized;
 
         Assert.AreEqual(expectedNorm, norm);
     }
 
-    [DataRow(3, 4, 5)]
-    [DataRow(0, 0, 0)]
-    [DataRow(-3, -4, 5)]
+    [DataRow(new float[] { 3, 4 }, 5)]
+    [DataRow(new float[] { 0, 0 }, 0)]
+    [DataRow(new float[] { -3, -4 }, 5)]
     [DataTestMethod]
-    public void TestLengthProperty(float x, float y, float expectedLength)
+    public void TestLengthProperty(float[] components, float expectedLength)
     {
-        Vector2D vec = new(x, y);
+        Vector2D vec = ComponentsToVector2D(components);
 
         float actualLength = vec.Length;
 
         Assert.AreEqual(expectedLength, actualLength);
     }
 
-    [DataRow(1, 1, 1, 1, true)]
-    [DataRow(0, 0, 0, 0, true)]
-    [DataRow(0, 1, 1, 0, false)]
-    [DataRow(1.5f, 1.5f, 1, 1, false)]
-    [DataRow(1.5f, 1.5f, 1.5f, 1.5f, true)]
+    [DataRow(new float[] { 1, 1 }, new float[] { 1, 1 }, true)]
+    [DataRow(new float[] { 0, 0 }, new float[] { 0, 0 }, true)]
+    [DataRow(new float[] { 0, 1 }, new float[] { 1, 0 }, false)]
+    [DataRow(new float[] { 1.5f, 1.5f }, new float[] { 1, 1 }, false)]
+    [DataRow(new float[] { 1.5f, 1.5f }, new float[] { 1.5f, 1.5f }, true)]
     [DataTestMethod]
-    public void TestComparisonOperator(float xA, float yA, float xB, float yB, bool equals)
+    public void TestComparisonOperator(float[] componentsA, float[] componentsB, bool equals)
     {
-        Vector2D a = new(xA, yA);
-        Vector2D b = new(xB, yB);
+        Vector2D a = ComponentsToVector2D(componentsA);
+        Vector2D b = ComponentsToVector2D(componentsB);
 
         Assert.AreEqual(a == b, equals);
         Assert.AreEqual(a != b, !equals);
@@ -78,19 +80,19 @@ public class Vector2DTests
         Assert.AreEqual(b != a, !equals);
     }
 
-    [DataRow(0, 0, "(0, 0)")]
-    [DataRow(-0, -0, "(0, 0)")]
-    [DataRow(100, 0, "(100, 0)")]
-    [DataRow(0, 100, "(0, 100)")]
-    [DataRow(-10, 10, "(-10, 10)")]
-    [DataRow(10, -10, "(10, -10)")]
-    [DataRow(-10, -10, "(-10, -10)")]
-    [DataRow(-5.1f, 5.5f, "(-5.1, 5.5)")]
-    [DataRow(0, 1.5f, "(0, 1.5)")]
+    [DataRow(new float[] { 0, 0 }, "(0, 0)")]
+    [DataRow(new float[] { -0, -0 }, "(0, 0)")]
+    [DataRow(new float[] { 100, 0 }, "(100, 0)")]
+    [DataRow(new float[] { 0, 100 }, "(0, 100)")]
+    [DataRow(new float[] { -10, 10 }, "(-10, 10)")]
+    [DataRow(new float[] { 10, -10 }, "(10, -10)")]
+    [DataRow(new float[] { -10, -10 }, "(-10, -10)")]
+    [DataRow(new float[] { -5.1f, 5.5f }, "(-5.1, 5.5)")]
+    [DataRow(new float[] { 0, 1.5f }, "(0, 1.5)")]
     [DataTestMethod]
-    public void TestToStringImpl(float x, float y, string expectedResult)
+    public void TestToStringImpl(float[] components, string expectedResult)
     {
-        Vector2D a = new(x, y);
+        Vector2D a = ComponentsToVector2D(components);
 
         string? converted = a.ToString();
 
