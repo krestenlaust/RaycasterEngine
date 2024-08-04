@@ -2,7 +2,7 @@
 
 namespace Engine.CameraPattern;
 
-public class PerspectivePlaneCameraPattern<TCastMethod, TPosition, TLength>(Angle fieldOfViewVertical, Angle fieldOfViewHorizontal, int sampleSize) : ICameraPattern<TCastMethod, TPosition, SphericalDirection, TLength>
+public class PerspectivePlaneCameraPattern<TCastMethod, TPosition, TLength>(Angle fieldOfViewVertical, int sampleSizeVertical, Angle fieldOfViewHorizontal, int sampleSizeHorizontal) : ICameraPattern<TCastMethod, TPosition, SphericalDirection, TLength>
     where TCastMethod : ICastMethod<TPosition, SphericalDirection, TLength>
 {
     /// <summary>
@@ -18,12 +18,12 @@ public class PerspectivePlaneCameraPattern<TCastMethod, TPosition, TLength>(Angl
     /// <summary>
     /// Gets or sets the amount of vertical samples to take within the field of view.
     /// </summary>
-    public int SampleSizeVertical { get; set; } = sampleSize;
+    public int SampleSizeVertical { get; set; } = sampleSizeVertical;
 
     /// <summary>
     /// Gets or sets the amount of horizontal samples to take within the field of view.
     /// </summary>
-    public int SampleSizeHorizontal { get; set; } = sampleSize;
+    public int SampleSizeHorizontal { get; set; } = sampleSizeVertical;
 
     public IEnumerable<Hit<TPosition, TLength>?> Render(IHitSpace<TPosition> space, TCastMethod caster, TPosition origin, SphericalDirection orientation, TLength renderDistance)
     {
