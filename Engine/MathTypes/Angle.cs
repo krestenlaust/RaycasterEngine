@@ -4,7 +4,7 @@
 /// Angle based around the positive first-axis, going counterclockwise.
 /// </summary>
 /// <param name="radians"></param>
-public readonly struct Angle(float radians)
+public readonly struct Angle(float radians) : IEquatable<Angle>
 {
     public static readonly Angle FullRotation = new (MathF.PI * 2);
     public static readonly Angle IdentityRotation = new (0);
@@ -61,6 +61,10 @@ public readonly struct Angle(float radians)
     public static Angle operator -(Angle orientation1, Angle orientation2) =>
         new (orientation1.Radians - orientation2.Radians);
 
+    public static bool operator ==(Angle left, Angle right) => left.Equals(right);
+
+    public static bool operator !=(Angle left, Angle right) => !(left == right);
+
     /// <summary>
     /// Instantiates an <see cref="Angle"/> based on angular degrees.
     /// NOTE: Does not treat values above 360 or below 0 differently.
@@ -69,4 +73,13 @@ public readonly struct Angle(float radians)
     /// <returns>The newly instantiated orientation-object.</returns>
     public static Angle FromDegrees(float degrees) =>
         new (degrees * (MathF.PI / 180));
+
+    /// <inheritdoc/>
+    public bool Equals(Angle other) => Radians.Equals(other.Radians);
+
+    /// <inheritdoc/>
+    public override bool Equals(object? obj) => obj is Angle angle && Equals(angle);
+
+    /// <inheritdoc/>
+    public override int GetHashCode() => Radians.GetHashCode();
 }
