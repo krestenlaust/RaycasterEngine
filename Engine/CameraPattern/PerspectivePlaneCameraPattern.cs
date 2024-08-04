@@ -2,6 +2,16 @@
 
 namespace Engine.CameraPattern;
 
+/// <summary>
+/// Casts another space into 2D.
+/// </summary>
+/// <typeparam name="TCastMethod">The casting method to utilize, e.g. <see cref="CastMethod.DiscreteRaycast"/> for standard euclidean iterative line casting.</typeparam>
+/// <typeparam name="TPosition">The spacial type to utilize, e.g. <see cref="MathTypes.Vector3D"/> for standard cartesian coordinate.</typeparam>
+/// <typeparam name="TLength">The distance type to utilize, e.g. <see cref="float"/>.</typeparam>
+/// <param name="fieldOfViewVertical">The vertical field of view, of the camera pattern.</param>
+/// <param name="sampleSizeVertical">The vertical amount of samples to take within the field of view.</param>
+/// <param name="fieldOfViewHorizontal">The horizontal field of view, of the camera pattern.</param>
+/// <param name="sampleSizeHorizontal">The horizontal amount of samples to take within the field of view.</param>
 public class PerspectivePlaneCameraPattern<TCastMethod, TPosition, TLength>(Angle fieldOfViewVertical, int sampleSizeVertical, Angle fieldOfViewHorizontal, int sampleSizeHorizontal) : ICameraPattern<TCastMethod, TPosition, SphericalDirection, TLength>
     where TCastMethod : ICastMethod<TPosition, SphericalDirection, TLength>
 {
