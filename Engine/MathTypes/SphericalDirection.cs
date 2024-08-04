@@ -21,6 +21,7 @@ public readonly struct SphericalDirection(Angle azimuthal, Angle polar) : IEquat
     /// <summary>
     /// Gets the cartesian directional unit-vector.
     /// It follows the RIGHT-UP-TOWARDS VIEWER - orientation.
+    /// TODO: Add tests to verify to-Vector calculations.
     /// </summary>
     public Vector3D Vector => new (
         MathF.Cos(Azimuth.Radians) * MathF.Sin(Inclination.Radians),
@@ -33,6 +34,7 @@ public readonly struct SphericalDirection(Angle azimuthal, Angle polar) : IEquat
 
     /// <summary>
     /// Converts a vector (unit or otherwise) into the spherical direction representation.
+    /// TODO: Add tests to verify FromVector.
     /// </summary>
     /// <param name="vector"></param>
     /// <returns></returns>
