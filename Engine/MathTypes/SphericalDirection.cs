@@ -20,11 +20,12 @@ public readonly struct SphericalDirection(Angle azimuthal, Angle polar) : IEquat
 
     /// <summary>
     /// Gets the cartesian directional unit-vector.
+    /// It follows the RIGHT-UP-TOWARDS VIEWER - orientation.
     /// </summary>
     public Vector3D Vector => new (
-        MathF.Sin(Azimuth.Radians) * MathF.Cos(Inclination.Radians),
-        MathF.Cos(Azimuth.Radians) * MathF.Cos(Inclination.Radians),
-        MathF.Sin(Inclination.Radians));
+        MathF.Cos(Azimuth.Radians) * MathF.Sin(Inclination.Radians),
+        MathF.Sin(Azimuth.Radians) * MathF.Sin(Inclination.Radians),
+        MathF.Cos(Inclination.Radians));
 
     public static bool operator ==(SphericalDirection left, SphericalDirection right) => left.Equals(right);
 
