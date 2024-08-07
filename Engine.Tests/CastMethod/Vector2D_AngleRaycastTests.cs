@@ -21,7 +21,7 @@ public abstract class Vector2D_AngleRaycastTests(ICastMethod<Vector2D, Angle, fl
         Vector2D expectedPoint = new(xPoint, yPoint);
         Vector2D origin = new(xOrigin, yOrigin);
 
-        bool castHit = cast.Cast(TestSpaces.Space5x5Bordered, origin, Angle.UpRotation, 5, out Hit<Vector2D, float>? hit);
+        bool castHit = cast.Cast(CartesianTestSpaces.Space5x5Bordered, origin, Angle.UpRotation, 5, out Hit<Vector2D, float>? hit);
 
         Assert.IsTrue(castHit);
         Assert.IsNotNull(hit);

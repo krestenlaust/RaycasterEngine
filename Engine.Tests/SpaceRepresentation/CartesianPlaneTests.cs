@@ -11,7 +11,7 @@ public class CartesianPlaneTests
     [DataTestMethod]
     public void TestCartesianPlaneIndexing4x4EveryOtherColumn(int x, int y, bool hit)
     {
-        var space = TestSpaces.Space4x4EveryOtherColumn;
+        var space = CartesianTestSpaces.Space4x4EveryOtherColumn;
 
         bool actualHit = space.IsHit(new Engine.MathTypes.Vector2D(x, y));
 
