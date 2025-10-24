@@ -36,9 +36,13 @@ internal class Program
 
             game.Render(screen);
 
-            Console.SetCursorPosition(0, 0);
+            if (OperatingSystem.IsWindows()){
+                Console.SetCursorPosition(0, 0);
+            } else {
+                Console.Write("\u001b[H\u001b[2J");
+            }
+
             Console.Write(internalScreenBuffer);
-            Console.SetWindowPosition(0, 0);
 
             Console.Title = $"FPS: {Math.Round(1 / sw.Elapsed.TotalSeconds)}";
             sw.Restart();
