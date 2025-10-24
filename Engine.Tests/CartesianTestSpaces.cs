@@ -3,7 +3,7 @@ using Engine.MathTypes;
 
 namespace Engine.Tests;
 
-public static class TestSpaces
+public static class CartesianTestSpaces
 {
     public static readonly IHitSpace<Vector2D> Space5x5Bordered = new CartesianPlane<int>(new int?[,]
         {
