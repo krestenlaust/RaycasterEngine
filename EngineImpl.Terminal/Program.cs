@@ -15,6 +15,7 @@ internal class Program
 
         int windowWidth = Console.WindowWidth;
         int windowHeight = Console.WindowHeight - 1;
+        int framerate = 60;
 
         var game = new Game(windowWidth, windowHeight);
 
@@ -40,9 +41,9 @@ internal class Program
             Console.Write(internalScreenBuffer);
             Console.SetWindowPosition(0, 0);
 
+            Thread.Sleep((int)Math.Max(0f, (1000f / framerate) - sw.Elapsed.TotalMilliseconds));
             Console.Title = $"FPS: {Math.Round(1 / sw.Elapsed.TotalSeconds)}";
             sw.Restart();
-            Thread.Sleep(0);
         }
     }
 }
