@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineImpl.Terminal", "Engi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineImpl.Forms", "EngineImpl.Forms\EngineImpl.Forms.csproj", "{F2CACEA1-A3D7-4BBA-82EF-6F8EDD5A6BF1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineImpl.WebApp", "EngineImpl.WebApp\EngineImpl.WebApp.csproj", "{77552B0C-FD6D-4694-9592-8EC524E4DA1C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{F2CACEA1-A3D7-4BBA-82EF-6F8EDD5A6BF1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2CACEA1-A3D7-4BBA-82EF-6F8EDD5A6BF1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2CACEA1-A3D7-4BBA-82EF-6F8EDD5A6BF1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77552B0C-FD6D-4694-9592-8EC524E4DA1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77552B0C-FD6D-4694-9592-8EC524E4DA1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77552B0C-FD6D-4694-9592-8EC524E4DA1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77552B0C-FD6D-4694-9592-8EC524E4DA1C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
