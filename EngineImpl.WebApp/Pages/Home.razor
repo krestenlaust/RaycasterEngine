@@ -1,0 +1,31 @@
+﻿@page "/"
+@using CommunityToolkit.HighPerformance
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<canvas @ref="_canvas" width="@Width" height="@Height"></canvas>
+
+@code {
+    private ElementReference _canvas;
+    private CanvasWindow? _window;
+
+    [Inject] private IJSRuntime JS { get; set; } = default!;
+
+    private int Width { get; set; } = 640;
+    private int Height { get; set; } = 480;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _window = new CanvasWindow(JS, _canvas, Width, Height);
+            // Example: render some initial frame
+            Span2D<(byte, byte, byte)> region = new Span2D<(byte, byte, byte)>(new (byte, byte, byte)[Width * Height], Width, Height);
+            _window.Render(region);
+        }
+    }
+}
